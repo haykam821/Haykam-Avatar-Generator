@@ -1,15 +1,13 @@
-const canvas = document.getElementById("e");
-const ctx = canvas.getContext("2d");
-
 const size = 300;
+const elem = React.createElement;
 
-canvas.width = canvas.height = size;
+const style = styled.default;
 
 function polygon(radius, pointCount, xPos, yPos, rotation) {
 	// Start path and save
 	ctx.save();
 	ctx.beginPath();
-	
+
 	// Set position and rotation
 	ctx.translate(xPos, yPos);
 	ctx.rotate(rotation);
@@ -27,48 +25,157 @@ function polygon(radius, pointCount, xPos, yPos, rotation) {
 	ctx.restore();
 }
 
+function generate(ctx) {
+	// bg
+	ctx.fillStyle = "#cdcdcd";
+	ctx.fillRect(0, 0, size, size);
 
-// bg
-ctx.fillStyle = "#cdcdcd";
-ctx.fillRect(0, 0, size, size);
+	// lines
+	ctx.strokeStyle = "#c6c6c6";
+	ctx.lineWidth = 1;
+	for (m = 0; m < size; m += (size / 16)) {
+		ctx.beginPath();
+		ctx.moveTo(m, 0)
+		ctx.lineTo(m, size)
+		ctx.closePath();
+		ctx.stroke();
+	}
+	for (m = 0; m < size; m += (size / 16)) {
+		ctx.beginPath();
+		ctx.moveTo(0, m)
+		ctx.lineTo(size, m)
+		ctx.closePath();
+		ctx.stroke();
+	}
 
-// lines
-ctx.strokeStyle = "#c6c6c6";
-ctx.lineWidth = 1;
-for (m = 0; m < size; m += (size / 16)) {
-	ctx.beginPath();
-	ctx.moveTo(m, 0)
-	ctx.lineTo(m, size)
-	ctx.closePath();
+	ctx.lineWidth = 10;
+	ctx.lineJoin = "round";
+
+	// green square
+	ctx.fillStyle = "#8aff69";
+	ctx.fillRect(40, 40, size - 80, size - 80);
+	ctx.strokeStyle = "#6cbe55";
+	ctx.strokeRect(40, 40, size - 80, size - 80);
+
+	// pentagon
+	ctx.fillStyle = "#768cfc";
+	polygon(80, 5, size / 2, size / 2, -0.32);
+	ctx.fill();
+	ctx.strokeStyle = "#5869bd";
+	ctx.stroke();
+
+	// pentagon
+	ctx.fillStyle = "#f177dd";
+	polygon(40, 3, size / 2, size / 2 + 6, 0.52);
+	ctx.fill();
+	ctx.strokeStyle = "#b459a5";
 	ctx.stroke();
 }
-for (m = 0; m < size; m += (size / 16)) {
-	ctx.beginPath();
-	ctx.moveTo(0, m)
-	ctx.lineTo(size, m)
-	ctx.closePath();
-	ctx.stroke();
+
+class Controls extends React.Component {
+	render() {
+		const inputs = this.props.controls.map(control => {
+			return elem("input");
+		});
+		return elem("div", {
+			children: inputs,
+		});
+	}
+}
+Controls.defaultProps = {
+	controls: [],
+};
+
+const themes = {
+	default: {
+		name: "(Defaults)",
+	},
+	dark: {
+		name: "Dark",
+		bg: "#333",
+		cardBg: () => chroma(themeProp("bg")).brighten(0.5),
+	},
+	light: {
+		name: "Light",
+		bg: "white",
+		cardBg: () => chroma(themeProp("bg")).darken(0.5),
+	}
+};
+const themeID = localStorage.getItem("haykam-avatar-generator:theme");
+const theme = themes[themeID] || themes.dark;
+
+function themeProp(prop) {
+	const val = themes[themeID][prop] || themes.dark[prop] || themes.default[prop];
+	return typeof val === "function" ? val() : val;
 }
 
-ctx.lineWidth = 10;
-ctx.lineJoin = "round";
+styled.injectGlobal({
+	body: {
+		backgroundColor: themeProp("bg"),
+		textAlign: "center",
+	},
+});
 
-// green square
-ctx.fillStyle = "#8aff69";
-ctx.fillRect(40, 40, size - 80, size - 80);
-ctx.strokeStyle = "#6cbe55";
-ctx.strokeRect(40, 40, size - 80, size - 80);
+class ThemeSelector extends React.Component {
+	render() {
+		return elem("select", {
+			children: Object.entries(themes).map(opt => {
+				return elem("option", {
+					value: opt[0],
+				}, opt[1].name);
+			}),
+			defaultValue: themeID,
+			onChange: event => {
+				localStorage.setItem("haykam-avatar-generator:theme", event.target.value);
+				location.reload();
+			}
+		});
+	}
+}
 
-// pentagon
-ctx.fillStyle = "#768cfc";
-polygon(80, 5, size / 2, size / 2, -0.32);
-ctx.fill();
-ctx.strokeStyle = "#5869bd";
-ctx.stroke();
+class HR extends React.Component {
+	render() {
+		return elem("div", {
+			style: {
+				minHeight: "0px",
+				clear: "both",
+				width: "100%",
+				borderTop: "0.5px solid",
+				borderBottom: "0.5px solid",
+				borderColor: themeProp("bg"),
+				height: "0px",
+				marginTop: "10px",
+				marginBottom: "10px",
+			},
+		});
+	}
+}
 
-// pentagon
-ctx.fillStyle = "#f177dd";
-polygon(40, 3, size / 2, size / 2 + 6, 0.52);
-ctx.fill();
-ctx.strokeStyle = "#b459a5";
-ctx.stroke();
+class App extends React.Component {
+	render() {
+		return elem("div", {
+			children: [
+				elem("canvas", {
+					width: size,
+					height: size,
+				}),
+				elem(HR),
+				elem(Controls, {
+					controls: [
+						"hi"
+					],
+				}),
+				elem(HR),
+				elem(ThemeSelector),
+			],
+			style: {
+				backgroundColor: themeProp("cardBg"),
+				margin: "32px",
+				padding: "8px",
+				borderRadius: 8,
+			},
+		});
+	}
+}
+
+ReactDOM.render(elem(App), document.getElementById("app"));
