@@ -133,6 +133,29 @@ class ThemeSelector extends React.Component {
 	}
 }
 
+class Card extends React.Component {
+	render() {
+		return elem("div", {
+			style: {
+				backgroundColor: themeProp("cardBg"),
+				padding: "16px",
+				borderRadius: 8,
+				marginTop: "24px",
+				marginBottom: "24px",
+			},
+			children: this.props.children,
+		});
+	}
+}
+
+function card(child, ...opts) {
+	return elem(Card, {
+		children: [
+			elem(child, ...opts),
+		],
+	});
+}
+
 class HR extends React.Component {
 	render() {
 		return elem("div", {
@@ -155,25 +178,20 @@ class App extends React.Component {
 	render() {
 		return elem("div", {
 			children: [
-				elem("canvas", {
+				card("canvas", {
 					width: size,
 					height: size,
 				}),
-				elem(HR),
-				elem(Controls, {
+				card(Controls, {
 					controls: [
 						"hi"
 					],
 				}),
-				elem(HR),
-				elem(ThemeSelector),
+				card(ThemeSelector),
 			],
 			style: {
-				backgroundColor: themeProp("cardBg"),
 				margin: "32px",
-				padding: "8px",
-				borderRadius: 8,
-			},
+			}
 		});
 	}
 }
