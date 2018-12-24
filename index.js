@@ -93,11 +93,13 @@ const themes = {
 	dark: {
 		name: "Dark",
 		bg: "#333",
+		text: "#ddd",
 		cardBg: () => chroma(themeProp("bg")).brighten(0.5),
 	},
 	light: {
 		name: "Light",
 		bg: "white",
+		text: "#444",
 		cardBg: () => chroma(themeProp("bg")).darken(0.5),
 	}
 };
@@ -135,6 +137,12 @@ class ThemeSelector extends React.Component {
 
 class Card extends React.Component {
 	render() {
+		if (this.props.header) {
+			this.props.children.unshift(elem(Header, {
+				text: this.props.header,
+			}));
+		}
+
 		return elem("div", {
 			style: {
 				backgroundColor: themeProp("cardBg"),
@@ -148,11 +156,12 @@ class Card extends React.Component {
 	}
 }
 
-function card(child, ...opts) {
+function card(header, child, ...opts) {
 	return elem(Card, {
 		children: [
 			elem(child, ...opts),
 		],
+		header,
 	});
 }
 
@@ -174,20 +183,33 @@ class HR extends React.Component {
 	}
 }
 
+class Header extends React.Component {
+	render() {
+		return elem("h2", {
+			style: {
+				textAlign: "left",
+				fontFamily: "Ubuntu, sans-serif",
+				color: themeProp("text"),
+				textTransform: "capitalize",
+				margin: 0,
+			}
+		}, this.props.text);
+	}
+}
 class App extends React.Component {
 	render() {
 		return elem("div", {
 			children: [
-				card("canvas", {
+				card("Preview", "canvas", {
 					width: size,
 					height: size,
 				}),
-				card(Controls, {
+				card("Settings", Controls, {
 					controls: [
 						"hi"
 					],
 				}),
-				card(ThemeSelector),
+				card("Theme", ThemeSelector),
 			],
 			style: {
 				margin: "32px",
