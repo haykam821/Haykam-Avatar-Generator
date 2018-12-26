@@ -1,7 +1,6 @@
 const themes = {
 	default: {
 		name: "(Defaults)",
-		every: "black",
 		hidden: true,
 	},
 	dark: {

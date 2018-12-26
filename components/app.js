@@ -11,7 +11,14 @@ class App extends React.Component {
 						"hi"
 					],
 				}),
-				card("Theme", ThemeSelector),
+				card("Theme", "div", {
+					children: [
+						elem(Paragraph, {
+							text: "You can select a theme.",
+						}),
+						elem(ThemeSelector),
+					],
+				}),
 			],
 			style: {
 				margin: "32px",

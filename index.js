@@ -79,4 +79,7 @@ styled.injectGlobal({
 	},
 });
 
-ReactDOM.render(elem(App), document.getElementById("app"));
+function render() {
+	return ReactDOM.render(elem(App), document.getElementById("app"));
+}
+render();
