@@ -11,7 +11,13 @@ class ThemeSelector extends React.Component {
 			defaultValue: themeID,
 			onChange: event => {
 				localStorage.setItem("haykam-avatar-generator:theme", event.target.value);
-				location.reload();
+				try {
+					updateTheme();
+					render();
+				} catch (error) {
+					console.error("Failed to re-render with new theme, but that's okay. We can just reload.", error);
+					location.reload();
+				}
 			}
 		});
 	}

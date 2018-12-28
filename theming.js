@@ -26,8 +26,12 @@ const themes = {
 		every: () => chroma.random(),
 	},
 };
-const themeID = localStorage.getItem("haykam-avatar-generator:theme");
-const theme = themes[themeID] || themes.dark;
+
+let themeID = "dark";
+function updateTheme() {
+	return themeID = localStorage.getItem("haykam-avatar-generator:theme") || "dark";
+}
+updateTheme();
 
 function themeProp(prop) {
 	const val = themes[themeID][prop] || themeProp("every") || themes.dark[prop] || themes.default[prop];

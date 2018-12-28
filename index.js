@@ -72,14 +72,10 @@ function generate(ctx) {
 	ctx.stroke();
 }
 
-styled.injectGlobal({
-	body: {
-		backgroundColor: themeProp("bg"),
-		textAlign: "center",
-	},
-});
+document.body.style.textAlign = "center";
 
 function render() {
+	document.body.style.backgroundColor = themeProp("bg");
 	return ReactDOM.render(elem(App), document.getElementById("app"));
 }
 render();
