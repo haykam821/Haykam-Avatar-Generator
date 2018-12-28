@@ -1,8 +1,3 @@
-const size = 300;
-const elem = React.createElement;
-
-const style = styled.default;
-
 function polygon(radius, pointCount, xPos, yPos, rotation) {
 	// Start path and save
 	ctx.save();
