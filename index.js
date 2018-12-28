@@ -1,4 +1,4 @@
-function polygon(radius, pointCount, xPos, yPos, rotation) {
+function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 	// Start path and save
 	ctx.save();
 	ctx.beginPath();
@@ -20,22 +20,30 @@ function polygon(radius, pointCount, xPos, yPos, rotation) {
 	ctx.restore();
 }
 
-function generate(ctx) {
+function darken(hex, factor = 0.75) {
+	return chroma(chroma(hex).rgb().map(channel => {
+		return Math.round(channel * factor);
+	})).hex();
+}
+
+function generate(ctx, opts = {}) {
+	console.log("Generating with opts:", opts);
+
 	// bg
-	ctx.fillStyle = "#cdcdcd";
+	ctx.fillStyle = opts.bgColor;
 	ctx.fillRect(0, 0, size, size);
 
 	// lines
-	ctx.strokeStyle = "#c6c6c6";
+	ctx.strokeStyle = opts.lineColor;
 	ctx.lineWidth = 1;
-	for (m = 0; m < size; m += (size / 16)) {
+	for (m = 0; m < size; m += (size / opts.lineSpacing)) {
 		ctx.beginPath();
 		ctx.moveTo(m, 0)
 		ctx.lineTo(m, size)
 		ctx.closePath();
 		ctx.stroke();
 	}
-	for (m = 0; m < size; m += (size / 16)) {
+	for (m = 0; m < size; m += (size / opts.lineSpacing)) {
 		ctx.beginPath();
 		ctx.moveTo(0, m)
 		ctx.lineTo(size, m)
@@ -47,23 +55,23 @@ function generate(ctx) {
 	ctx.lineJoin = "round";
 
 	// green square
-	ctx.fillStyle = "#8aff69";
+	ctx.fillStyle = opts.squareColor;
 	ctx.fillRect(40, 40, size - 80, size - 80);
-	ctx.strokeStyle = "#6cbe55";
+	ctx.strokeStyle = darken(opts.squareColor);
 	ctx.strokeRect(40, 40, size - 80, size - 80);
 
 	// pentagon
-	ctx.fillStyle = "#768cfc";
-	polygon(80, 5, size / 2, size / 2, -0.32);
+	ctx.fillStyle = opts.pentagonColor;
+	polygon(80, 5, size / 2, size / 2, -0.32, ctx);
 	ctx.fill();
-	ctx.strokeStyle = "#5869bd";
+	ctx.strokeStyle = darken(opts.pentagonColor);
 	ctx.stroke();
 
 	// pentagon
-	ctx.fillStyle = "#f177dd";
-	polygon(40, 3, size / 2, size / 2 + 6, 0.52);
+	ctx.fillStyle = opts.triangleColor;
+	polygon(40, 3, size / 2, size / 2 + 6, 0.52, ctx);
 	ctx.fill();
-	ctx.strokeStyle = "#b459a5";
+	ctx.strokeStyle = darken(opts.triangleColor);
 	ctx.stroke();
 }
 

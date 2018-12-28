@@ -1,6 +1,7 @@
 const themes = {
 	default: {
 		name: "(Defaults)",
+		primary: "blue",
 		hidden: true,
 	},
 	dark: {
@@ -8,6 +9,8 @@ const themes = {
 		bg: "#333",
 		text: "#ddd",
 		cardBg: () => chroma(themeProp("bg")).brighten(0.5),
+		primary: "#4473f4",
+		secondary: "#44cbf4",
 	},
 	light: {
 		name: "Light",
@@ -21,10 +24,6 @@ const themes = {
 		text: "orangered",
 		cardBg: "yellow",
 	},
-	random: {
-		name: "Random",
-		every: () => chroma.random(),
-	},
 };
 
 let themeID = "dark";
@@ -34,6 +33,6 @@ function updateTheme() {
 updateTheme();
 
 function themeProp(prop) {
-	const val = themes[themeID][prop] || themeProp("every") || themes.dark[prop] || themes.default[prop];
+	const val = themes[themeID][prop] || themes.dark[prop] || themes.default[prop];
 	return typeof val === "function" ? val() : val;
 }
