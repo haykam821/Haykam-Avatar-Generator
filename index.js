@@ -56,20 +56,20 @@ function generate(ctx, opts = {}) {
 
 	// green square
 	ctx.fillStyle = opts.squareColor;
-	ctx.fillRect(40, 40, size - 80, size - 80);
+	ctx.fillRect(60, 60, size - 120, size - 120);
 	ctx.strokeStyle = darken("squareColor", opts);
-	ctx.strokeRect(40, 40, size - 80, size - 80);
+	ctx.strokeRect(60, 60, size - 120, size - 120);
 
 	// pentagon
 	ctx.fillStyle = opts.pentagonColor;
-	polygon(80, 5, size / 2, size / 2, -0.32, ctx);
+	polygon(70, 5, size / 2, size / 2, -0.32, ctx);
 	ctx.fill();
 	ctx.strokeStyle = darken("pentagonColor", opts);
 	ctx.stroke();
 
 	// pentagon
 	ctx.fillStyle = opts.triangleColor;
-	polygon(40, 3, size / 2, size / 2 + 6, 0.52, ctx);
+	polygon(35, 3, size / 2, size / 2 + 6, 0.52, ctx);
 	ctx.fill();
 	ctx.strokeStyle = darken("triangleColor", opts);
 	ctx.stroke();
