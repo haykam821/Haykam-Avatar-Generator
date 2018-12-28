@@ -7,17 +7,12 @@ class Controls extends React.Component {
 	render() {
 		const inputs = this.props.controls.map(control => {
 			this.fields[control.key] = control.default;
-			return elem("input", {
+			return elem(Input, {
 				...control.props,
-				style: {
-					display: "block",
-					margin: "auto",
-					marginTop: 0,
-					marginBottom: 24,
-					...control.props && control.props.style,
-				},
-				default: control.default,
+				style: control.props && control.props.style,
+				placeholder: control.default,
 				id: control.key,
+				description: control.description,
 				onChange: event => this.fields[event.target.id] = event.target.value || control.default,
 			});
 		});

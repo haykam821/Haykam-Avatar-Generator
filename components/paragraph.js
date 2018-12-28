@@ -4,6 +4,8 @@ class Paragraph extends React.Component {
 			style: {
 				color: themeProp("text"),
 				textAlign: "left",
+				margin: 8,
+				...this.props.style,
 			},
 		}, this.props.text);
 	}

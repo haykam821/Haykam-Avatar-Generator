@@ -35,15 +35,15 @@ function generate(ctx, opts = {}) {
 
 	// lines
 	ctx.strokeStyle = opts.lineColor;
-	ctx.lineWidth = 1;
-	for (m = 0; m < size; m += (size / opts.lineSpacing)) {
+	ctx.lineWidth = opts.lineWidth;
+	for (m = 0; m < size; m += (size / opts.lineCount)) {
 		ctx.beginPath();
 		ctx.moveTo(m, 0)
 		ctx.lineTo(m, size)
 		ctx.closePath();
 		ctx.stroke();
 	}
-	for (m = 0; m < size; m += (size / opts.lineSpacing)) {
+	for (m = 0; m < size; m += (size / opts.lineCount)) {
 		ctx.beginPath();
 		ctx.moveTo(0, m)
 		ctx.lineTo(size, m)

@@ -15,23 +15,38 @@ class App extends React.Component {
 					controls: [{
 						key: "bgColor",
 						default: "#cdcdcd",
+						description: "The color of the background.",
+						type: "color",
 					}, {
-						key: "lineSpacing",
+						key: "lineCount",
 						default: 16,
+						description: "The amount of lines in the background.",
+						type: "number",
+					}, {
+						key: "lineWidth",
+						default: 1,
+						description: "The width of the lines in the background.",
+						type: "number",
 					}, {
 						key: "lineColor",
 						default: "#c6c6c6",
+						description: "The color of the background's lines.",
+						type: "color",
 					}, {
 						key: "squareColor",
 						default: "#8aff69",
+						description: "The color of the outer square.",
+						type: "color",
 					}, {
 						key: "pentagonColor",
 						default: "#768cfc",
+						description: "The color of the middle pentagon.",
+						type: "color",
 					}, {
 						key: "triangleColor",
 						default: "#f177dd",
-					}, {
-						key: "size",
+						description: "The color of the inner triangle.",
+						type: "color",
 					}],
 				}),
 				card("Theme", "div", {
