@@ -18,6 +18,11 @@ class App extends React.Component {
 						description: "The color of the background.",
 						type: "color",
 					}, {
+						key: "borderColor",
+						placeholder: "#525252",
+						description: "The color of the shapes' borders. If left blank, uses the 'new' border style in Diep.io.",
+						type: "color",
+					}, {
 						key: "lineCount",
 						default: 16,
 						description: "The amount of lines in the background.",

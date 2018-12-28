@@ -10,7 +10,7 @@ class Controls extends React.Component {
 			return elem(Input, {
 				...control.props,
 				style: control.props && control.props.style,
-				placeholder: control.default,
+				placeholder: control.placeholder || control.default,
 				id: control.key,
 				description: control.description,
 				onChange: event => this.fields[event.target.id] = event.target.value || control.default,

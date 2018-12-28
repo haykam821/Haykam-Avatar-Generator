@@ -20,8 +20,8 @@ function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 	ctx.restore();
 }
 
-function darken(hex, factor = 0.75) {
-	return chroma(chroma(hex).rgb().map(channel => {
+function darken(type, opts, factor = 0.75) {
+	return opts.borderColor || chroma(chroma(opts[type]).rgb().map(channel => {
 		return Math.round(channel * factor);
 	})).hex();
 }
@@ -57,21 +57,21 @@ function generate(ctx, opts = {}) {
 	// green square
 	ctx.fillStyle = opts.squareColor;
 	ctx.fillRect(40, 40, size - 80, size - 80);
-	ctx.strokeStyle = darken(opts.squareColor);
+	ctx.strokeStyle = darken("squareColor", opts);
 	ctx.strokeRect(40, 40, size - 80, size - 80);
 
 	// pentagon
 	ctx.fillStyle = opts.pentagonColor;
 	polygon(80, 5, size / 2, size / 2, -0.32, ctx);
 	ctx.fill();
-	ctx.strokeStyle = darken(opts.pentagonColor);
+	ctx.strokeStyle = darken("pentagonColor", opts);
 	ctx.stroke();
 
 	// pentagon
 	ctx.fillStyle = opts.triangleColor;
 	polygon(40, 3, size / 2, size / 2 + 6, 0.52, ctx);
 	ctx.fill();
-	ctx.strokeStyle = darken(opts.triangleColor);
+	ctx.strokeStyle = darken("triangleColor", opts);
 	ctx.stroke();
 }
 
