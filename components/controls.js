@@ -24,6 +24,11 @@ class Controls extends React.Component {
 					label: "Render",
 				}),
 			],
+			onKeyDown: event => {
+				if (event.nativeEvent.code === "Enter" && event.nativeEvent.metaKey) {
+					generate(document.getElementById("canvas").getContext("2d"), this.fields);
+				}
+			},
 		});
 	}
 }
