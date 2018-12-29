@@ -20,16 +20,23 @@ class Controls extends React.Component {
 			children: [
 				inputs,
 				elem(Button, {
-					onClick: () => generate(document.getElementById("canvas").getContext("2d"), this.fields),
+					onClick: this.renderToCanvas(),
 					label: "Render",
 				}),
 			],
 			onKeyDown: event => {
 				if (event.nativeEvent.code === "Enter" && event.nativeEvent.metaKey) {
-					generate(document.getElementById("canvas").getContext("2d"), this.fields);
+					this.renderToCanvas();
 				}
 			},
 		});
+	}
+
+	renderToCanvas() {
+		const canvasElem = document.getElementById("canvas");
+		if (canvasElem) {
+			generate(canvasElem.getContext("2d"), this.fields);
+		}
 	}
 }
 Controls.defaultProps = {
