@@ -32,6 +32,10 @@ class Controls extends React.Component {
 		});
 	}
 
+	componentDidMount() {
+		this.renderToCanvas();
+	}
+
 	renderToCanvas() {
 		const canvasElem = document.getElementById("canvas");
 		if (canvasElem) {
