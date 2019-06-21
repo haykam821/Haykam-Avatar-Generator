@@ -5,9 +5,9 @@ require("./theming.js");
 const ReactDOM = require("react-dom");
 
 const React = require("react");
-const { size, elem } = require("./magic.js");
+const { size } = require("./magic.js");
 
-const App = require("./components/app.js");
+const App = require("./components/app.jsx");
 
 const chroma = require("chroma-js");
 
@@ -93,7 +93,7 @@ document.body.style.textAlign = "center";
 
 function render() {
 	document.body.style.backgroundColor = themeProp("bg");
-	return ReactDOM.render(elem(App), document.getElementById("app"));
+	return ReactDOM.render(<App/>, document.getElementById("app"));
 }
 render();
 global.render = render;

@@ -1,8 +1,8 @@
 const React = require("react");
 const elem = React.createElement;
 
-const Input = require("./input.js");
-const Button = require("./button.js");
+const Input = require("./input.jsx");
+const Button = require("./button.jsx");
 
 class Controls extends React.Component {
 	constructor(props) {
@@ -22,20 +22,14 @@ class Controls extends React.Component {
 				onChange: event => this.fields[event.target.id] = event.target.value || control.default,
 			});
 		});
-		return elem("div", {
-			children: [
-				inputs,
-				elem(Button, {
-					onClick: this.renderToCanvas(),
-					label: "Render",
-				}),
-			],
-			onKeyDown: event => {
-				if (event.nativeEvent.code === "Enter" && event.nativeEvent.metaKey) {
-					this.renderToCanvas();
-				}
-			},
-		});
+		return <div onKeyDown={event => {
+			if (event.nativeEvent.code === "Enter" && event.nativeEvent.metaKey) {
+				this.renderToCanvas();
+			}
+		}}>
+			{inputs}
+			<Button label="Render" onClick={this.renderToCanvas} />
+		</div>;
 	}
 
 	componentDidMount() {

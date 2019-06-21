@@ -5,6 +5,7 @@
 	"devDependencies": {
 		"file-loader": "^4.0.0",
 		"html-minify-loader": "^1.4.0",
+		"jsx-loader": "^0.13.2",
 		"webpack": "^4.35.0",
 		"webpack-cli": "^3.3.4"
 	},

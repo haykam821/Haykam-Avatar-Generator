@@ -1,15 +1,15 @@
 const { size, elem } = require("../magic.js");
-const card = require("./card.js");
 const React = require("react");
 
-const Controls = require("./controls.js");
-const Paragraph = require("./paragraph.js");
-const ThemeSelector = require("./theme-selector.js");
+const card = require("./card.jsx");
+const Controls = require("./controls.jsx");
+const Paragraph = require("./paragraph.jsx");
+const ThemeSelector = require("./theme-selector.jsx");
 
 class App extends React.Component {
 	render() {
-		return elem("div", {
-			children: [
+		return <div>
+			{[
 				card("Preview", "canvas", {
 					width: size,
 					height: size,
@@ -63,18 +63,13 @@ class App extends React.Component {
 					}],
 				}),
 				card("Theme", "div", {
-					children: [
-						elem(Paragraph, {
-							text: "You can select a theme.",
-						}),
-						elem(ThemeSelector),
-					],
+					children: <React.Fragment>
+						<Paragraph text="You can select a theme." />
+						<ThemeSelector />
+					</React.Fragment>,
 				}),
-			],
-			style: {
-				margin: "32px",
-			}
-		});
+			]}
+		</div>
 	}
 }
 module.exports = App;
