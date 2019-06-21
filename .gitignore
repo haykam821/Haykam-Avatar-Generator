@@ -1,0 +1,4 @@
+node_modules/
+
+# Webpack output
+dist/
