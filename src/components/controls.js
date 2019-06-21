@@ -1,3 +1,9 @@
+const React = require("react");
+const elem = React.createElement;
+
+const Input = require("./input.js");
+const Button = require("./button.js");
+
 class Controls extends React.Component {
 	constructor(props) {
 		super(props);
@@ -46,3 +52,4 @@ class Controls extends React.Component {
 Controls.defaultProps = {
 	controls: [],
 };
+module.exports = Controls;

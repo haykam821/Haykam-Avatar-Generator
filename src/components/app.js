@@ -1,3 +1,11 @@
+const { size, elem } = require("../magic.js");
+const card = require("./card.js");
+const React = require("react");
+
+const Controls = require("./controls.js");
+const Paragraph = require("./paragraph.js");
+const ThemeSelector = require("./theme-selector.js");
+
 class App extends React.Component {
 	render() {
 		return elem("div", {
@@ -69,3 +77,4 @@ class App extends React.Component {
 		});
 	}
 }
+module.exports = App;

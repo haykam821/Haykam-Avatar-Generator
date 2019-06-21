@@ -1,3 +1,8 @@
+const React = require("react");
+const elem = React.createElement;
+
+const Paragraph = require("./paragraph.js");
+
 class Input extends React.Component {
 	render() {
 		return elem("div", {
@@ -26,3 +31,4 @@ class Input extends React.Component {
 		});
 	}
 }
+module.exports = Input;

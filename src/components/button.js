@@ -1,3 +1,6 @@
+const React = require("react");
+const elem = React.createElement;
+
 class Button extends React.Component {
 	render() {
 		return elem("button", {
@@ -21,3 +24,4 @@ class Button extends React.Component {
 		}, this.props.label);
 	}
 }
+module.exports = Button;

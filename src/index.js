@@ -1,3 +1,16 @@
+require("file-loader?name=[name].[ext]!html-minify-loader!./index.html");
+
+require("./theming.js");
+
+const ReactDOM = require("react-dom");
+
+const React = require("react");
+const { size, elem } = require("./magic.js");
+
+const App = require("./components/app.js");
+
+const chroma = require("chroma-js");
+
 function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 	// Start path and save
 	ctx.save();
@@ -74,6 +87,7 @@ function generate(ctx, opts = {}) {
 	ctx.strokeStyle = darken("triangleColor", opts);
 	ctx.stroke();
 }
+global.generate = generate;
 
 document.body.style.textAlign = "center";
 
@@ -82,3 +96,4 @@ function render() {
 	return ReactDOM.render(elem(App), document.getElementById("app"));
 }
 render();
+global.render = render;

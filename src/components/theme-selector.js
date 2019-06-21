@@ -1,3 +1,6 @@
+const React = require("react");
+const elem = React.createElement;
+
 class ThemeSelector extends React.Component {
 	render() {
 		return elem("select", {
@@ -22,3 +25,4 @@ class ThemeSelector extends React.Component {
 		});
 	}
 }
+module.exports = ThemeSelector;

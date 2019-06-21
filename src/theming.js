@@ -1,3 +1,5 @@
+const chroma = require("chroma-js");
+
 const themes = {
 	default: {
 		name: "(Defaults)",
@@ -25,14 +27,18 @@ const themes = {
 		cardBg: "yellow",
 	},
 };
+global.themes = themes;
 
 let themeID = "dark";
+global.themeID = themeID;
 function updateTheme() {
 	return themeID = localStorage.getItem("haykam-avatar-generator:theme") || "dark";
 }
+global.updateTheme = updateTheme;
 updateTheme();
 
 function themeProp(prop) {
 	const val = themes[themeID][prop] || themes.dark[prop] || themes.default[prop];
 	return typeof val === "function" ? val() : val;
 }
+global.themeProp = themeProp;

@@ -1,3 +1,6 @@
+const React = require("react");
+const elem = React.createElement;
+
 class HR extends React.Component {
 	render() {
 		return elem("div", {
@@ -15,3 +18,4 @@ class HR extends React.Component {
 		});
 	}
 }
+module.exports = HR;

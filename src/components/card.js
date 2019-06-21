@@ -1,3 +1,8 @@
+const React = require("react");
+const elem = React.createElement;
+
+const Header = require("./header.js");
+
 class Card extends React.Component {
 	render() {
 		if (this.props.header) {
@@ -27,3 +32,4 @@ function card(header, child, ...opts) {
 		header,
 	});
 }
+module.exports = card;

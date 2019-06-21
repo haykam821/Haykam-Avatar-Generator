@@ -1,3 +1,6 @@
+const React = require("react");
+const elem = React.createElement;
+
 class Paragraph extends React.Component {
 	render() {
 		return elem("p", {
@@ -10,3 +13,4 @@ class Paragraph extends React.Component {
 		}, this.props.text);
 	}
 }
+module.exports = Paragraph;

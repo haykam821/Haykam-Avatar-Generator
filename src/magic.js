@@ -1,4 +1,8 @@
-const size = 300;
-const elem = React.createElement;
+const React = require("react");
+const styled = require("styled-components");
 
-const style = styled.default;
+module.exports = {
+	size: 300,
+	elem: React.createElement,
+	style: styled.default,
+};

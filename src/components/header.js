@@ -1,3 +1,6 @@
+const React = require("react");
+const elem = React.createElement;
+
 class Header extends React.Component {
 	render() {
 		return elem("h2", {
@@ -11,3 +14,4 @@ class Header extends React.Component {
 		}, this.props.text);
 	}
 }
+module.exports = Header;
