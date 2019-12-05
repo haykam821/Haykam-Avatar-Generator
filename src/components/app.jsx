@@ -32,7 +32,7 @@ function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 
 	ctx.moveTo(radius, 0);
 
-	for (i = 0; i <= pointCount; i++) {
+	for (let point = 0; point <= pointCount; point++) {
 		ctx.rotate(2 * Math.PI / pointCount);
 		ctx.lineTo(radius, 0);
 	}
@@ -83,17 +83,17 @@ function generate(ctx, opts = {}) {
 	// Lines
 	ctx.strokeStyle = opts.lineColor;
 	ctx.lineWidth = opts.lineWidth;
-	for (m = 0; m < size; m += (size / opts.lineCount)) {
+	for (let line = 0; line < size; line += (size / opts.lineCount)) {
 		ctx.beginPath();
-		ctx.moveTo(m, 0);
-		ctx.lineTo(m, size);
+		ctx.moveTo(line, 0);
+		ctx.lineTo(line, size);
 		ctx.closePath();
 		ctx.stroke();
 	}
-	for (m = 0; m < size; m += (size / opts.lineCount)) {
+	for (let line = 0; line < size; line += (size / opts.lineCount)) {
 		ctx.beginPath();
-		ctx.moveTo(0, m);
-		ctx.lineTo(size, m);
+		ctx.moveTo(0, line);
+		ctx.lineTo(size, line);
 		ctx.closePath();
 		ctx.stroke();
 	}
