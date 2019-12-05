@@ -1,4 +1,5 @@
 const React = require("react");
+const propTypes = require("prop-types");
 const elem = React.createElement;
 
 const Input = require("./input.jsx");
@@ -32,4 +33,10 @@ class Controls extends React.Component {
 Controls.defaultProps = {
 	controls: [],
 };
+Controls.propTypes = {
+	controls: propTypes.arrayOf(propTypes.object),
+	renderToCanvas: propTypes.func,
+	update: propTypes.func,
+};
+
 module.exports = Controls;

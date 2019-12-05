@@ -1,6 +1,7 @@
 const size = 300;
 
 const React = require("react");
+const propTypes = require("prop-types");
 
 const Card = require("./card.jsx");
 const Controls = require("./controls.jsx");
@@ -121,7 +122,7 @@ function generate(ctx, opts = {}) {
 	ctx.stroke();
 }
 
-const App = styled(class App extends React.Component {
+class AppUnstyled extends React.Component {
 	constructor(props) {
 		super(props);
 		this.canvas = React.createRef();
@@ -172,7 +173,12 @@ const App = styled(class App extends React.Component {
 			</div>
 		</div>;
 	}
-})`
+}
+AppUnstyled.propTypes = {
+	className: propTypes.string,
+};
+
+const App = styled(AppUnstyled)`
 	font-family: sans-serif;
 	color: #ddd;
 

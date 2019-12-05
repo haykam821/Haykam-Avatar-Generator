@@ -1,5 +1,5 @@
 const React = require("react");
-const elem = React.createElement;
+const propTypes = require("prop-types");
 React.__spread = Object.assign;
 
 const styled = require("styled-components").default;
@@ -9,7 +9,7 @@ const Paragraph = require("./paragraph.jsx");
 class InputUnstyled extends React.Component {
 	render() {
 		return <div className={this.props.className}>
-			{this.props.description ? <Paragraph text={this.props.description} /> : null}
+			{this.props.description && <Paragraph text={this.props.description} />}
 			<input {...this.props} style={{
 				backgroundColor: "#333",
 				border: "none",
@@ -24,6 +24,11 @@ class InputUnstyled extends React.Component {
 		</div>;
 	}
 }
+InputUnstyled.propTypes = {
+	className: propTypes.string,
+	description: propTypes.string,
+	style: propTypes.object,
+};
 
 const Input = styled(InputUnstyled)`
 	padding: 8px;

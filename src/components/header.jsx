@@ -1,13 +1,21 @@
 const React = require("react");
+const propTypes = require("prop-types");
+
 const styled = require("styled-components").default;
 
-const Header = styled(class Header extends React.Component {
+class HeaderUnstyled extends React.Component {
 	render() {
 		return <h2 className={this.props.className}>
 			{this.props.text}
 		</h2>;
 	}
-})`
+}
+HeaderUnstyled.propTypes = {
+	className: propTypes.string,
+	text: propTypes.string,
+};
+
+const Header = styled(HeaderUnstyled)`
 	text-align: left;
 	font-family: "Ubuntu", sans-serif;
 	color: "#ddd";

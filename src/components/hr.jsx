@@ -1,4 +1,6 @@
 const React = require("react");
+const propTypes = require("prop-types");
+
 const styled = require("styled-components").default;
 
 class HRUnstyled extends React.Component {
@@ -6,6 +8,9 @@ class HRUnstyled extends React.Component {
 		return <div className={this.props.className} />;
 	}
 }
+HRUnstyled.propTypes = {
+	className: propTypes.string,
+};
 
 const HR = styled(HRUnstyled)`
 	border-color: #333;

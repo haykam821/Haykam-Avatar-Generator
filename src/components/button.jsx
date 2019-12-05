@@ -1,4 +1,6 @@
 const React = require("react");
+const propTypes = require("prop-types");
+
 const styled = require("styled-components").default;
 
 class ButtonUnstyled extends React.Component {
@@ -8,6 +10,11 @@ class ButtonUnstyled extends React.Component {
 		</button>;
 	}
 }
+ButtonUnstyled.propTypes = {
+	className: propTypes.string,
+	label: propTypes.string,
+	style: propTypes.object,
+};
 
 const Button = styled(ButtonUnstyled)`
 	background-color: #4473f4;
