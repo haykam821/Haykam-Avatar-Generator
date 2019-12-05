@@ -114,6 +114,7 @@ const App = styled(class App extends React.Component {
 			options: defaultOptions,
 		};
 
+		this.renderToCanvas = this.renderToCanvas.bind(this);
 		this.update = this.update.bind(this);
 	}
 

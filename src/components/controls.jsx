@@ -25,7 +25,7 @@ class Controls extends React.Component {
 			}
 		}}>
 			{inputs}
-			<Button label="Render" onClick={this.renderToCanvas} />
+			<Button label="Render" onClick={this.props.renderToCanvas} />
 		</div>;
 	}
 }
