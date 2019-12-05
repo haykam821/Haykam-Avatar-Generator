@@ -2,7 +2,7 @@ const debug = require("debug");
 
 const log = debug("haykam-avatar-generator");
 module.exports = {
-	main: log,
 	editor: log.extend("editor"),
+	main: log,
 	render: log.extend("render"),
 };

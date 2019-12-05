@@ -4,8 +4,8 @@ class Paragraph extends React.Component {
 	render() {
 		return <p style={{
 			color: "#ddd",
-			textAlign: "left",
 			margin: 8,
+			textAlign: "left",
 			...this.props.style,
 		}}>
 			{this.props.text}

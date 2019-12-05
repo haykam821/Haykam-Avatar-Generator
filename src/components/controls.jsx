@@ -9,14 +9,14 @@ class Controls extends React.Component {
 		const inputs = this.props.controls.map(control => {
 			return elem(Input, {
 				...control.props,
-				style: control.props && control.props.style,
-				placeholder: control.placeholder || control.default,
-				id: control.key,
 				description: control.description,
+				id: control.key,
 				key: control.key,
 				onChange: event => {
 					this.props.update(control.key, event.target.value || control.default);
 				},
+				placeholder: control.placeholder || control.default,
+				style: control.props && control.props.style,
 			});
 		});
 		return <div onKeyDown={event => {

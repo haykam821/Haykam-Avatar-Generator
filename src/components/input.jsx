@@ -13,14 +13,14 @@ class Input extends React.Component {
 				text: this.props.description,
 			}) : ""}
 			<input {...this.props} style={{
-				display: "block",
 				backgroundColor: "#333",
-				color: "white",
-				padding: 8,
-				width: "100%",
 				border: "none",
+				color: "white",
+				display: "block",
 				fontFamily: "Ubuntu",
 				fontSize: 14,
+				padding: 8,
+				width: "100%",
 				...this.props.style,
 			}} />
 		</div>;

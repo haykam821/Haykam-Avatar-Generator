@@ -4,7 +4,6 @@ const React = require("react");
 
 const Card = require("./card.jsx");
 const Controls = require("./controls.jsx");
-const Paragraph = require("./paragraph.jsx");
 
 const styled = require("styled-components").default;
 const chroma = require("chroma-js");
@@ -12,6 +11,15 @@ const chroma = require("chroma-js");
 const { editor: editorLog, render: renderLog } = require("../debug.js");
 const controls = require("../controls.js");
 
+/**
+ * Draws a polygon.
+ * @param {number} radius The radius of the polygon.
+ * @param {number} pointCount The number of points on the polygon.
+ * @param {number} xPos The X coordinate of the polygon's center.
+ * @param {number} yPos The Y coordinate of the polygon's center.
+ * @param {number} rotation The offset of the polygon's angle.
+ * @param {CanvasRenderingContext2D} ctx The context to render the polygon on.
+ */
 function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 	// Start path and save
 	ctx.save();
@@ -34,13 +42,20 @@ function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 	ctx.restore();
 }
 
+/**
+ * Darkens a color in Diep.io style for use as a border.
+ * @param {string} type The key for the color in the options object.
+ * @param {Object} opts The options object to get the color from.
+ * @param {number} factor The factor to darken by.
+ * @returns {string} The color to use.
+ */
 function darken(type, opts, factor = 0.75) {
 	try {
 		if (opts.borderColor) return opts.borderColor;
 
 		const value = opts[type];
 		if (value === undefined) return "#000000";
-	;
+
 		const color = chroma(value);
 		const rgb = chroma(color).rgb();
 
@@ -52,27 +67,32 @@ function darken(type, opts, factor = 0.75) {
 	}
 }
 
+/**
+ * Renders an avatar.
+ * @param {CanvasRenderingContext2D} ctx The context to render the avatar to.
+ * @param {Object} opts The options to generate the avatar with.
+ */
 function generate(ctx, opts = {}) {
 	renderLog("rendering avatar to canvas with options: %o", opts);
 
-	// bg
+	// Bg
 	ctx.fillStyle = opts.bgColor;
 	ctx.fillRect(0, 0, size, size);
 
-	// lines
+	// Lines
 	ctx.strokeStyle = opts.lineColor;
 	ctx.lineWidth = opts.lineWidth;
 	for (m = 0; m < size; m += (size / opts.lineCount)) {
 		ctx.beginPath();
-		ctx.moveTo(m, 0)
-		ctx.lineTo(m, size)
+		ctx.moveTo(m, 0);
+		ctx.lineTo(m, size);
 		ctx.closePath();
 		ctx.stroke();
 	}
 	for (m = 0; m < size; m += (size / opts.lineCount)) {
 		ctx.beginPath();
-		ctx.moveTo(0, m)
-		ctx.lineTo(size, m)
+		ctx.moveTo(0, m);
+		ctx.lineTo(size, m);
 		ctx.closePath();
 		ctx.stroke();
 	}
@@ -80,20 +100,20 @@ function generate(ctx, opts = {}) {
 	ctx.lineWidth = 10;
 	ctx.lineJoin = "round";
 
-	// green square
+	// Green square
 	ctx.fillStyle = opts.squareColor;
 	ctx.fillRect(60, 60, size - 120, size - 120);
 	ctx.strokeStyle = darken("squareColor", opts);
 	ctx.strokeRect(60, 60, size - 120, size - 120);
 
-	// pentagon
+	// Pentagon
 	ctx.fillStyle = opts.pentagonColor;
 	polygon(70, 5, size / 2, size / 2, -0.32, ctx);
 	ctx.fill();
 	ctx.strokeStyle = darken("pentagonColor", opts);
 	ctx.stroke();
 
-	// pentagon
+	// Pentagon
 	ctx.fillStyle = opts.triangleColor;
 	polygon(35, 3, size / 2, size / 2 + 6, 0.52, ctx);
 	ctx.fill();
@@ -105,11 +125,11 @@ const App = styled(class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.canvas = React.createRef();
-		
+
 		const defaultOptions = Object.fromEntries(controls.map(control => {
 			return [control.key, control.default];
 		}));
-		editorLog("setting default options to %o", defaultOptions)
+		editorLog("setting default options to %o", defaultOptions);
 		this.state = {
 			options: defaultOptions,
 		};
@@ -150,7 +170,7 @@ const App = styled(class App extends React.Component {
 					<Controls update={this.update} renderToCanvas={this.renderToCanvas} controls={controls} />
 				</Card>
 			</div>
-		</div>
+		</div>;
 	}
 })`
 	font-family: sans-serif;
