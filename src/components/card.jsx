@@ -3,27 +3,19 @@ const elem = React.createElement;
 
 const Header = require("./header.jsx");
 
-class Card extends React.Component {
-	render() {
-		if (this.props.header) {
-			this.props.children.unshift(<Header text={this.props.header} />);
-		}
+const styled = require("styled-components").default;
 
-		return <div style={{
-			backgroundColor: themeProp("cardBg"),
-			padding: "16px",
-			borderRadius: 8,
-			marginTop: "24px",
-			marginBottom: "24px",
-		}}>
+const Card = styled(class Card extends React.Component {
+	render() {
+		return <div className={this.props.className}>
+			{this.props.header && <Header text={this.props.header} />}
 			{this.props.children}
 		</div>;
 	}
-}
-
-function card(header, child, ...opts) {
-	return <Card header={header}>
-		{[React.createElement(child, opts)]}
-	</Card>;
-}
-module.exports = card;
+})`
+	background-color: gray;
+	padding: 16px;
+	border-radius: 8px;
+	margin-bottom: 24px;
+`;
+module.exports = Card;

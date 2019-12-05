@@ -5,7 +5,7 @@ class Button extends React.Component {
 	render() {
 		return <button {...this.props} style={{
 			display: "block",
-			backgroundColor: themeProp("primary"),
+			backgroundColor: "#4473f4",
 			color: "white",
 			margin: [
 				0,

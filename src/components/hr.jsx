@@ -9,7 +9,7 @@ class HR extends React.Component {
 			width: "100%",
 			borderTop: "0.5px solid",
 			borderBottom: "0.5px solid",
-			borderColor: themeProp("bg"),
+			borderColor: "#333",
 			height: "0px",
 			marginTop: "10px",
 			marginBottom: "10px",

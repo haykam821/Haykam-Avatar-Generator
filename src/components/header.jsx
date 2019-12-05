@@ -1,17 +1,17 @@
 const React = require("react");
-const elem = React.createElement;
+const styled = require("styled-components").default;
 
-class Header extends React.Component {
+const Header = styled(class Header extends React.Component {
 	render() {
-		return <h2 style={{
-			textAlign: "left",
-			fontFamily: "Ubuntu, sans-serif",
-			color: themeProp("text"),
-			textTransform: "capitalize",
-			margin: 0,
-		}}>
+		return <h2 className={this.props.className}>
 			{this.props.text}
 		</h2>;
 	}
-}
+})`
+	text-align: left;
+	font-family: "Ubuntu", sans-serif;
+	color: "#ddd";
+	text-transform: capitalize;
+	margin: 0;
+`;
 module.exports = Header;

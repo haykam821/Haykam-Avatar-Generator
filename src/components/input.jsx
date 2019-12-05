@@ -14,7 +14,7 @@ class Input extends React.Component {
 			}) : ""}
 			<input {...this.props} style={{
 				display: "block",
-				backgroundColor: themeProp("bg"),
+				backgroundColor: "#333",
 				color: "white",
 				padding: 8,
 				width: "100%",

@@ -5,42 +5,28 @@ const Input = require("./input.jsx");
 const Button = require("./button.jsx");
 
 class Controls extends React.Component {
-	constructor(props) {
-		super(props);
-		this.fields = {};
-	}
-
 	render() {
 		const inputs = this.props.controls.map(control => {
-			this.fields[control.key] = control.default;
 			return elem(Input, {
 				...control.props,
 				style: control.props && control.props.style,
 				placeholder: control.placeholder || control.default,
 				id: control.key,
 				description: control.description,
-				onChange: event => this.fields[event.target.id] = event.target.value || control.default,
+				key: control.key,
+				onChange: event => {
+					this.props.update(control.key, event.target.value || control.default);
+				},
 			});
 		});
 		return <div onKeyDown={event => {
 			if (event.nativeEvent.code === "Enter" && event.nativeEvent.metaKey) {
-				this.renderToCanvas();
+				this.props.renderToCanvas();
 			}
 		}}>
 			{inputs}
 			<Button label="Render" onClick={this.renderToCanvas} />
 		</div>;
-	}
-
-	componentDidMount() {
-		this.renderToCanvas();
-	}
-
-	renderToCanvas() {
-		const canvasElem = document.getElementById("canvas");
-		if (canvasElem) {
-			generate(canvasElem.getContext("2d"), this.fields);
-		}
 	}
 }
 Controls.defaultProps = {

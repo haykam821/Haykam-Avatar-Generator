@@ -3,7 +3,7 @@ const React = require("react");
 class Paragraph extends React.Component {
 	render() {
 		return <p style={{
-			color: themeProp("text"),
+			color: "#ddd",
 			textAlign: "left",
 			margin: 8,
 			...this.props.style,
