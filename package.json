@@ -1,8 +1,18 @@
 {
 	"scripts": {
-		"build": "webpack --config webpack.config.js"
+		"build": "webpack --config webpack.config.js",
+		"lint": "eslint \"./**/*.js\" \"./**/*.jsx\" --ignore-path .gitignore"
 	},
 	"devDependencies": {
+		"babel-eslint": "^10.0.3",
+		"eslint": "^6.7.2",
+		"eslint-config-haykam": "^1.8.0",
+		"eslint-plugin-extra-rules": "0.0.0-development",
+		"eslint-plugin-html": "^6.0.0",
+		"eslint-plugin-json": "^1.4.0",
+		"eslint-plugin-markdown": "^1.0.1",
+		"eslint-plugin-react": "^7.17.0",
+		"eslint-plugin-unicorn": "^10.0.0",
 		"file-loader": "^4.0.0",
 		"html-minify-loader": "^1.4.0",
 		"jsx-loader": "^0.13.2",
@@ -15,5 +25,20 @@
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
 		"styled-components": "^4.3.2"
+	},
+	"eslintConfig": {
+		"extends": [
+			"eslint-config-haykam",
+			"plugin:react/recommended"
+		],
+		"env": {
+			"browser": true
+		},
+		"parser": "babel-eslint",
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
+		}
 	}
 }
