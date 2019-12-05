@@ -9,6 +9,7 @@ const Paragraph = require("./paragraph.jsx");
 const styled = require("styled-components").default;
 const chroma = require("chroma-js");
 
+const { editor: editorLog, render: renderLog } = require("../debug.js");
 const controls = require("../controls.js");
 
 function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
@@ -52,7 +53,7 @@ function darken(type, opts, factor = 0.75) {
 }
 
 function generate(ctx, opts = {}) {
-	console.log("Generating with opts:", opts);
+	renderLog("rendering avatar to canvas with options: %o", opts);
 
 	// bg
 	ctx.fillStyle = opts.bgColor;
@@ -104,10 +105,13 @@ const App = styled(class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.canvas = React.createRef();
+		
+		const defaultOptions = Object.fromEntries(controls.map(control => {
+			return [control.key, control.default];
+		}));
+		editorLog("setting default options to %o", defaultOptions)
 		this.state = {
-			options: Object.fromEntries(controls.map(control => {
-				return [control.key, control.default];
-			})),
+			options: defaultOptions,
 		};
 
 		this.update = this.update.bind(this);
@@ -120,7 +124,7 @@ const App = styled(class App extends React.Component {
 	}
 
 	update(option, value) {
-		console.log(option, value)
+		editorLog("setting option '%s' to '%s'", option, value);
 		this.setState({
 			options: {
 				...this.state.options,
