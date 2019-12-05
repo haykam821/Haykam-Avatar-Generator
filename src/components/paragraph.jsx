@@ -1,15 +1,17 @@
 const React = require("react");
+const styled = require("styled-components").default;
 
-class Paragraph extends React.Component {
+class ParagraphUnstyled extends React.Component {
 	render() {
-		return <p style={{
-			color: "#ddd",
-			margin: 8,
-			textAlign: "left",
-			...this.props.style,
-		}}>
+		return <p className={this.props.className} style={this.props.style}>
 			{this.props.text}
 		</p>;
 	}
 }
+
+const Paragraph = styled(ParagraphUnstyled)`
+	color: #ddd;
+	margin: 8px;
+	text-align: left;
+`;
 module.exports = Paragraph;

@@ -1,19 +1,24 @@
 const React = require("react");
-const elem = React.createElement;
+const styled = require("styled-components").default;
 
-class HR extends React.Component {
+class HRUnstyled extends React.Component {
 	render() {
-		return <div style={{
-			borderBottom: "0.5px solid",
-			borderColor: "#333",
-			borderTop: "0.5px solid",
-			clear: "both",
-			height: "0px",
-			marginBottom: "10px",
-			marginTop: "10px",
-			minHeight: "0px",
-			width: "100%",
-		}} />;
+		return <div className={this.props.className} />;
 	}
 }
+
+const HR = styled(HRUnstyled)`
+	border-color: #333;
+	border-top: 0.5px solid;
+	border-bottom: 0.5px solid;
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	clear: both;
+
+	height: 0px;
+	min-height: 0px;
+	width: 100%;
+`;
 module.exports = HR;

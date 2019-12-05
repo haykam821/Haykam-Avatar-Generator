@@ -1,9 +1,7 @@
 const React = require("react");
-const elem = React.createElement;
+const styled = require("styled-components").default;
 
 const Header = require("./header.jsx");
-
-const styled = require("styled-components").default;
 
 const Card = styled(class Card extends React.Component {
 	render() {
