@@ -1,3 +1,5 @@
+const { resolve } = require("path");
+
 module.exports = {
 	entry: "./src/index.jsx",
 	mode: process.env.WEBPACK_MODE || "production",
@@ -8,7 +10,7 @@ module.exports = {
 		}],
 	},
 	output: {
-		path: __dirname + "/dist",
 		filename: "index.js",
+		path: resolve(__dirname, "./dist"),
 	},
 };
