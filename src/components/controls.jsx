@@ -8,6 +8,7 @@ const Button = require("./button.jsx");
 class Controls extends React.Component {
 	render() {
 		const inputs = this.props.controls.map(control => {
+			const type = control.type || typeof control.default;
 			return elem(Input, {
 				...control.props,
 				description: control.description,
@@ -18,6 +19,7 @@ class Controls extends React.Component {
 				},
 				placeholder: control.placeholder || control.default,
 				style: control.props && control.props.style,
+				type: type === "color" ? "string" : type,
 			});
 		});
 		return <div onKeyDown={event => {
