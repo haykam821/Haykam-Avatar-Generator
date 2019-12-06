@@ -1,4 +1,8 @@
 {
+	"name": "haykam-avatar-generator",
+	"description": "A generator for haykam-styled avatars.",
+	"version": "1.0.0",
+	"main": "./src/index.jsx",
 	"scripts": {
 		"build": "webpack --config webpack.config.js",
 		"lint": "eslint \"./**/*.js\" \"./**/*.jsx\" --ignore-path .gitignore"
@@ -41,5 +45,22 @@
 				"version": "detect"
 			}
 		}
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/haykam821/Haykam-Avatar-Generator.git"
+	},
+	"keywords": [
+		"haykam",
+		"avatar",
+		"generator",
+		"editor",
+		"customization"
+	],
+	"author": "haykam821",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/haykam821/Haykam-Avatar-Generator/issues"
+	},
+	"homepage": "https://github.com/haykam821/Haykam-Avatar-Generator#readme"
 }
