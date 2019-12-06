@@ -1,4 +1,4 @@
-# Haykam Avatar Generator
+# Haykam Avatar Generator [![Travis (.com)](https://img.shields.io/travis/com/haykam821/Haykam-Avatar-Generator.svg?style=popout)](https://travis-ci.com/haykam821/Haykam-Avatar-Generator)
 
 A generator for haykam-styled avatars.
 
