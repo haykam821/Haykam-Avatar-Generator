@@ -1,0 +1,8 @@
+{
+  "name": "Haykam Avatar Generator",
+  "short_name": "Haykam Avatar",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "lang": "en"
+}
