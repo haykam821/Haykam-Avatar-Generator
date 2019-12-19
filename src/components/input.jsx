@@ -10,17 +10,7 @@ class InputUnstyled extends React.Component {
 	render() {
 		return <div className={this.props.className}>
 			{this.props.description && <Paragraph text={this.props.description} />}
-			<input {...this.props} style={{
-				backgroundColor: "#333",
-				border: "none",
-				color: "white",
-				display: "block",
-				fontFamily: "Ubuntu",
-				fontSize: 14,
-				padding: 8,
-				width: "100%",
-				...this.props.style,
-			}} />
+			<input {...this.props} />
 		</div>;
 	}
 }
@@ -32,5 +22,16 @@ InputUnstyled.propTypes = {
 
 const Input = styled(InputUnstyled)`
 	padding: 8px;
+
+	& > input {
+		background-color: #333;
+		border: none;
+		color: white;
+		display: block;
+		font-family: 'Ubuntu';
+		font-size: 14px;
+		padding: 8px;
+		width: 100%;
+	}
 `;
 module.exports = Input;
