@@ -1,6 +1,5 @@
 const React = require("react");
 const propTypes = require("prop-types");
-React.__spread = Object.assign;
 
 const styled = require("styled-components").default;
 
