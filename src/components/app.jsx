@@ -180,9 +180,8 @@ AppUnstyled.propTypes = {
 
 const App = styled(AppUnstyled)`
 	font-family: sans-serif;
-	color: #ddd;
+	color: white;
 
-	background: #333;
 	text-align: center;
 
 	& > div {

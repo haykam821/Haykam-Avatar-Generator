@@ -20,7 +20,7 @@ CardUnstyled.propTypes = {
 };
 
 const Card = styled(CardUnstyled)`
-	background-color: gray;
+	background-color: #424242;
 	padding: 16px;
 	border-radius: 8px;
 

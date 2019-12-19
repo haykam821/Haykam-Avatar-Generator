@@ -24,14 +24,19 @@ const Input = styled(InputUnstyled)`
 	padding-top: 0;
 
 	& > input {
-		background-color: #333;
+		background-color: #1b1b1b;
 		border: none;
+		border-radius: 8px;
 		color: white;
 		display: block;
 		font-family: 'Ubuntu';
 		font-size: 1.1em;
 		padding: 8px;
 		width: 100%;
+
+		&::placeholder {
+			color: #aaa;
+		}
 	}
 `;
 module.exports = Input;

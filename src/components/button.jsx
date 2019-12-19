@@ -17,15 +17,16 @@ ButtonUnstyled.propTypes = {
 };
 
 const Button = styled(ButtonUnstyled)`
-	background-color: #4473f4;
+	background-color: #1976D2;
 	color: white;
+	font-weight: 500;
 
 	border: none;
+	border-radius: 8px;
 	display: block;
 
 	font-family: 'Ubuntu';
 	font-size: 1.2em;
-	font-weight: bold;
 
 	margin: 0 8px;
 	margin-top: 16px;
