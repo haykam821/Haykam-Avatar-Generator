@@ -1,6 +1,5 @@
 const React = require("react");
 const propTypes = require("prop-types");
-const elem = React.createElement;
 
 const Input = require("./input.jsx");
 const Button = require("./button.jsx");

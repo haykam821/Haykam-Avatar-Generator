@@ -18,6 +18,7 @@ class InputUnstyled extends React.Component {
 InputUnstyled.propTypes = {
 	className: propTypes.string,
 	description: propTypes.string,
+	id: propTypes.string,
 	style: propTypes.object,
 };
 

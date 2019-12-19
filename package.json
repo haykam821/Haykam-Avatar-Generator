@@ -29,7 +29,8 @@
 		"prop-types": "^15.7.2",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
-		"styled-components": "^4.3.2"
+		"styled-components": "^4.3.2",
+		"webpack-pwa-manifest": "4.0.0"
 	},
 	"eslintConfig": {
 		"extends": [
