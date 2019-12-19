@@ -24,11 +24,12 @@ const Button = styled(ButtonUnstyled)`
 	display: block;
 
 	font-family: 'Ubuntu';
-	font-size: 14px;
+	font-size: 1.2em;
 	font-weight: bold;
-	
-	margin: 0 auto;
+
+	margin: 0 8px;
+	margin-top: 16px;
 	padding: 8px;
-	width: 100%;
+	width: calc(100% - 16px);
 `;
 module.exports = Button;

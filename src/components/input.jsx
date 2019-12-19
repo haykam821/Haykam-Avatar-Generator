@@ -21,6 +21,7 @@ InputUnstyled.propTypes = {
 
 const Input = styled(InputUnstyled)`
 	padding: 8px;
+	padding-top: 0;
 
 	& > input {
 		background-color: #333;
@@ -28,7 +29,7 @@ const Input = styled(InputUnstyled)`
 		color: white;
 		display: block;
 		font-family: 'Ubuntu';
-		font-size: 14px;
+		font-size: 1.1em;
 		padding: 8px;
 		width: 100%;
 	}

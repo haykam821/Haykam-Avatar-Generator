@@ -18,7 +18,11 @@ ParagraphUnstyled.propTypes = {
 
 const Paragraph = styled(ParagraphUnstyled)`
 	color: #ddd;
-	margin: 8px;
 	text-align: left;
+	font-size: 1.2em;
+
+	margin: 0;
+	padding: 12px 0;
+	padding-bottom: 8px;
 `;
 module.exports = Paragraph;

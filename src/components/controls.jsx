@@ -6,7 +6,7 @@ const Input = require("./input.jsx");
 const Button = require("./button.jsx");
 
 class Controls extends React.Component {
-	constructor() {
+	constructor(props) {
 		super(props);
 
 		this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -17,7 +17,7 @@ class Controls extends React.Component {
 			this.props.renderToCanvas();
 		}
 	}
-	
+
 	renderInputs() {
 		return this.props.controls.map(control => {
 			const type = control.type || typeof control.default;

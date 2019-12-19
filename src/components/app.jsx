@@ -192,6 +192,7 @@ const App = styled(AppUnstyled)`
 	canvas {
 		background-color: white;
 		border: 1px solid black;
+		max-width: 100%;
 	}
 `;
 module.exports = App;

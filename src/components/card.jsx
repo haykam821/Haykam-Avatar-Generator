@@ -23,6 +23,9 @@ const Card = styled(CardUnstyled)`
 	background-color: gray;
 	padding: 16px;
 	border-radius: 8px;
-	margin-bottom: 24px;
+
+	&:not(:last-child) {
+		margin-bottom: 24px;
+	}
 `;
 module.exports = Card;

@@ -18,8 +18,10 @@ HeaderUnstyled.propTypes = {
 const Header = styled(HeaderUnstyled)`
 	text-align: left;
 	font-family: "Ubuntu", sans-serif;
+	font-size: 1.8em;
 	color: "#ddd";
 	text-transform: capitalize;
 	margin: 0;
+	padding-bottom: 0.3em;
 `;
 module.exports = Header;
