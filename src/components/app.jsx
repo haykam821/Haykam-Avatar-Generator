@@ -180,8 +180,6 @@ AppUnstyled.propTypes = {
 
 const App = styled(AppUnstyled)`
 	font-family: sans-serif;
-	color: white;
-
 	text-align: center;
 
 	& > div {
@@ -189,9 +187,19 @@ const App = styled(AppUnstyled)`
 	}
 
 	canvas {
-		background-color: white;
-		border: 1px solid black;
+		background-color: black;
+		border: 1px solid gray;
 		max-width: 100%;
+	}
+
+	color: #222;
+	@media (prefers-color-scheme: dark) {
+		color: white;
+
+		canvas {
+			background-color: white;
+			border-color: black;
+		}
 	}
 `;
 module.exports = App;

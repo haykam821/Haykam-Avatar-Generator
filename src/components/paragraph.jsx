@@ -17,7 +17,6 @@ ParagraphUnstyled.propTypes = {
 };
 
 const Paragraph = styled(ParagraphUnstyled)`
-	color: #ddd;
 	text-align: left;
 	font-size: 1.2em;
 

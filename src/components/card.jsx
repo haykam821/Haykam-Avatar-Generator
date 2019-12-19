@@ -20,12 +20,16 @@ CardUnstyled.propTypes = {
 };
 
 const Card = styled(CardUnstyled)`
-	background-color: #424242;
 	padding: 16px;
 	border-radius: 8px;
 
 	&:not(:last-child) {
 		margin-bottom: 24px;
+	}
+
+	background-color: #c7c7c7;
+	@media (prefers-color-scheme: dark) {
+		background-color: #424242;
 	}
 `;
 module.exports = Card;

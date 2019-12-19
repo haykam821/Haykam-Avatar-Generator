@@ -8,7 +8,9 @@ const Paragraph = require("./paragraph.jsx");
 class InputUnstyled extends React.Component {
 	render() {
 		return <div className={this.props.className}>
-			{this.props.description && <Paragraph text={this.props.description} />}
+			<label htmlFor={this.props.id}>
+				{this.props.description && <Paragraph text={this.props.description} />}
+			</label>
 			<input {...this.props} />
 		</div>;
 	}
@@ -24,10 +26,11 @@ const Input = styled(InputUnstyled)`
 	padding-top: 0;
 
 	& > input {
-		background-color: #1b1b1b;
+		background-color: white;
+		color: #555;
+
 		border: none;
 		border-radius: 8px;
-		color: white;
 		display: block;
 		font-family: 'Ubuntu';
 		font-size: 1.1em;
@@ -36,6 +39,17 @@ const Input = styled(InputUnstyled)`
 
 		&::placeholder {
 			color: #aaa;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		& > input {
+			background-color: #1b1b1b;
+			color: white;
+
+			&::placeholder {
+				color: #aaa;
+			}
 		}
 	}
 `;
