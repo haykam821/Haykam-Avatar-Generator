@@ -1,4 +1,28 @@
+const { theme: log } = require("./debug.js");
+
 const themes = {
+	get custom() {
+		try {
+			const customThemeJSON = localStorage.getItem("haykam-avatar-generator:custom-theme");
+			const customParent = localStorage.getItem("haykam-avatar-generator:custom-parent");
+
+			const customTheme = JSON.parse(customThemeJSON);
+
+			if (themes[customParent]) {
+				return {
+					...themes[customParent],
+					...customTheme,
+				};
+			} else if (customTheme) {
+				return customTheme;
+			}
+
+			return {};
+		} catch (error) {
+			log("encountered error when retrieving custom theme:", error);
+			return {};
+		}
+	},
 	dark: {
 		background: "#1b1b1b",
 		canvasBackground: "white",

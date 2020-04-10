@@ -42,6 +42,7 @@ class ThemedApp extends React.Component {
 		return {
 			...themes.default,
 			...themes[this.state.theme],
+			...themes.custom,
 		};
 	}
 
