@@ -40,7 +40,7 @@ class Controls extends React.Component {
 
 		return <div onKeyDown={this.handleKeyDown}>
 			{inputs}
-			<Button label="Render" onClick={this.props.renderToCanvas} />
+			{this.props.renderButton && <Button label="Render" onClick={this.props.renderToCanvas} />}
 		</div>;
 	}
 }
@@ -49,6 +49,7 @@ Controls.defaultProps = {
 };
 Controls.propTypes = {
 	controls: propTypes.arrayOf(propTypes.object),
+	renderButton: propTypes.bool,
 	renderToCanvas: propTypes.func,
 	update: propTypes.func,
 };

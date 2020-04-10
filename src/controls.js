@@ -1,4 +1,4 @@
-module.exports = [{
+const controls = [{
 	default: "#cdcdcd",
 	description: "The color of the background.",
 	key: "bgColor",
@@ -23,19 +23,5 @@ module.exports = [{
 	description: "The color of the background's lines.",
 	key: "lineColor",
 	type: "color",
-}, {
-	default: "#8aff69",
-	description: "The color of the outer square.",
-	key: "squareColor",
-	type: "color",
-}, {
-	default: "#768cfc",
-	description: "The color of the middle pentagon.",
-	key: "pentagonColor",
-	type: "color",
-}, {
-	default: "#f177dd",
-	description: "The color of the inner triangle.",
-	key: "triangleColor",
-	type: "color",
 }];
+module.exports = controls;

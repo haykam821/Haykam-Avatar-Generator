@@ -5,11 +5,14 @@ const propTypes = require("prop-types");
 
 const Card = require("./card.jsx");
 const Controls = require("./controls.jsx");
+const ControlsCardRow = require("./controls-card-row.jsx");
 
 const styled = require("styled-components").default;
 const chroma = require("chroma-js");
 
 const { editor: editorLog, render: renderLog } = require("../debug.js");
+
+const layerCards = require("../layer-cards.js");
 const controls = require("../controls.js");
 
 /**
@@ -127,9 +130,7 @@ class AppUnstyled extends React.Component {
 		super(props);
 		this.canvas = React.createRef();
 
-		const defaultOptions = Object.fromEntries(controls.map(control => {
-			return [control.key, control.default];
-		}));
+		const defaultOptions = this.getDefaultOptions();
 		editorLog("setting default options to %o", defaultOptions);
 		this.state = {
 			options: defaultOptions,
@@ -137,6 +138,19 @@ class AppUnstyled extends React.Component {
 
 		this.renderToCanvas = this.renderToCanvas.bind(this);
 		this.update = this.update.bind(this);
+	}
+
+	getDefaultOptions() {
+		return {
+			...Object.fromEntries(layerCards.flatMap(layer => {
+				return layer[1].map(control => {
+					return [control.key, control.default];
+				});
+			})),
+			...Object.fromEntries(controls.map(control => {
+				return [control.key, control.default];
+			})),
+		};
 	}
 
 	renderToCanvas() {
@@ -167,8 +181,9 @@ class AppUnstyled extends React.Component {
 				<Card header="Preview">
 					<canvas width={size} height={size} ref={this.canvas}></canvas>
 				</Card>
-				<Card header="Settings">
-					<Controls update={this.update} renderToCanvas={this.renderToCanvas} controls={controls} />
+				<ControlsCardRow update={this.update} renderToCanvas={this.renderToCanvas} cards={layerCards} />
+				<Card header="General">
+					<Controls update={this.update} renderToCanvas={this.renderToCanvas} controls={controls} renderButton={true} />
 				</Card>
 			</div>
 		</div>;
