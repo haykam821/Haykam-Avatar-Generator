@@ -17,8 +17,8 @@ ButtonUnstyled.propTypes = {
 };
 
 const Button = styled(ButtonUnstyled)`
-	background-color: #1976D2;
-	color: white;
+	background-color: ${props => props.theme.buttonBackground};
+	color: ${props => props.theme.buttonText};
 	font-weight: 500;
 
 	border: none;

@@ -27,8 +27,8 @@ const Input = styled(InputUnstyled)`
 	padding-top: 0;
 
 	& > input {
-		background-color: white;
-		color: #555;
+		background-color: ${props => props.theme.inputBackground};
+		color: ${props => props.theme.inputText};
 
 		border: none;
 		border-radius: 8px;
@@ -39,18 +39,7 @@ const Input = styled(InputUnstyled)`
 		width: 100%;
 
 		&::placeholder {
-			color: #aaa;
-		}
-	}
-
-	@media (prefers-color-scheme: dark) {
-		& > input {
-			background-color: #1b1b1b;
-			color: white;
-
-			&::placeholder {
-				color: #aaa;
-			}
+			color: ${props => props.theme.inputPlaceholderText};
 		}
 	}
 `;

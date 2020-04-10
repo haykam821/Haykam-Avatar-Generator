@@ -187,19 +187,11 @@ const App = styled(AppUnstyled)`
 	}
 
 	canvas {
-		background-color: black;
-		border: 1px solid gray;
+		background-color: ${props => props.theme.canvasBackground};
+		border: 1px solid ${props => props.theme.canvasBorder};
 		max-width: 100%;
 	}
 
-	color: #222;
-	@media (prefers-color-scheme: dark) {
-		color: white;
-
-		canvas {
-			background-color: white;
-			border-color: black;
-		}
-	}
+	color: ${props => props.theme.text};
 `;
 module.exports = App;

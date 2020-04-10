@@ -7,8 +7,8 @@ React.__spread = Object.assign;
 
 const ReactDOM = require("react-dom");
 
-const App = require("./components/app.jsx");
+const ThemedApp = require("./components/themed-app.jsx");
 
-ReactDOM.render(<App/>, document.getElementById("app"), () => {
+ReactDOM.render(<ThemedApp/>, document.getElementById("app"), () => {
 	log("mounted application");
 });

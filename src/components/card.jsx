@@ -27,9 +27,6 @@ const Card = styled(CardUnstyled)`
 		margin-bottom: 24px;
 	}
 
-	background-color: #c7c7c7;
-	@media (prefers-color-scheme: dark) {
-		background-color: #424242;
-	}
+	background-color: ${props => props.theme.cardBackground};
 `;
 module.exports = Card;

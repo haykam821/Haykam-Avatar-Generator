@@ -13,7 +13,7 @@ HRUnstyled.propTypes = {
 };
 
 const HR = styled(HRUnstyled)`
-	border-color: #333;
+	border-color: ${props => props.theme.horizontalRule};
 	border-top: 0.5px solid;
 	border-bottom: 0.5px solid;
 
