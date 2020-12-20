@@ -69,12 +69,34 @@ function darken(type, opts, factor = 0.75) {
 }
 
 /**
+ * Clips the corners of the rendering context based on the corner radius.
+ * @param {CanvasRenderingContext2D} ctx The context to render the avatar to.
+ * @param {Object} opts The options to generate the avatar with.
+ */
+function clipCorners(ctx, opts = {}) {
+	ctx.moveTo(size / 2, 0);
+
+	ctx.arcTo(size, 0, size, size, Math.min(size / 2, opts.cornerRadius));
+	ctx.arcTo(size, size, 0, size, Math.min(size / 2, opts.cornerRadius));
+	ctx.arcTo(0, size, 0, 0, Math.min(size / 2, opts.cornerRadius));
+	ctx.arcTo(0, 0, opts.cornerRadius, 0, Math.min(size / 2, opts.cornerRadius));
+
+	ctx.lineTo(size / 2, 0);
+	ctx.clip();
+}
+
+/**
  * Renders an avatar.
  * @param {CanvasRenderingContext2D} ctx The context to render the avatar to.
  * @param {Object} opts The options to generate the avatar with.
  */
 function generate(ctx, opts = {}) {
 	renderLog("rendering avatar to canvas with options: %o", opts);
+
+	ctx.save();
+
+	ctx.clearRect(0, 0, size, size);
+	clipCorners(ctx, opts);
 
 	// Bg
 	ctx.fillStyle = opts.bgColor;
@@ -120,6 +142,8 @@ function generate(ctx, opts = {}) {
 	ctx.fill();
 	ctx.strokeStyle = darken("triangleColor", opts);
 	ctx.stroke();
+
+	ctx.restore();
 }
 
 class AppUnstyled extends React.Component {

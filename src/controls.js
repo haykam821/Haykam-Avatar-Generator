@@ -9,6 +9,11 @@ module.exports = [{
 	placeholder: "#525252",
 	type: "color",
 }, {
+	default: 0,
+	description: "The size of the corners to clip.",
+	key: "cornerRadius",
+	type: "number",
+}, {
 	default: 16,
 	description: "The amount of lines in the background.",
 	key: "lineCount",
