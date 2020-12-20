@@ -5,6 +5,7 @@ import Card from "./card";
 import Controls from "./controls";
 import OptionManager from "../option/option-manager";
 import React from "react";
+import SharingLink from "./sharing-link";
 import chroma from "chroma-js";
 import { loggers } from "../debug";
 import propTypes from "prop-types";
@@ -161,6 +162,7 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 		super(props);
 		this.canvas = React.createRef();
 
+		this.optionManager.restoreFromParams(new URLSearchParams(location.search));
 		loggers.editor("setting default options to %o", this.optionManager.getAll());
 
 		this.renderToCanvas = this.renderToCanvas.bind(this);
@@ -190,6 +192,9 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 				</Card>
 				<Card header="Settings">
 					<Controls update={this.update} renderToCanvas={this.renderToCanvas} optionManager={this.optionManager} />
+				</Card>
+				<Card header="Sharing">
+					<SharingLink location={window.location} optionManager={this.optionManager} />
 				</Card>
 			</div>
 		</div>;

@@ -1,7 +1,8 @@
+import { EventTarget } from "event-target-shim";
 import Option from "./option";
 import { loggers } from "../debug";
 
-export default class OptionManager {
+export default class OptionManager extends EventTarget {
 	private readonly options: Record<string, Option<unknown>> = Object.fromEntries([{
 		default: "#cdcdcd",
 		description: "The color of the background.",
@@ -80,10 +81,27 @@ export default class OptionManager {
 		}));
 	}
 
+	isDefault(key: string): boolean {
+		return this.getString(key) === this.options[key].defaultValue;
+	}
+
 	set(key: string, value: unknown): void {
 		if (this.options[key]) {
 			loggers.editor("setting option '%s' to '%s'", key, value);
 			this.options[key].value = value;
+			this.dispatchEvent(new Event("update"));
+		}
+	}
+
+	private setSilently(key: string, value: unknown): void {
+		if (this.options[key]) {
+			this.options[key].value = value;
+		}
+	}
+
+	restoreFromParams(params: URLSearchParams): void {
+		for (const [ key, value ] of params) {
+			this.setSilently(key, value);
 		}
 	}
 }

@@ -36,10 +36,8 @@ export default class Controls extends React.Component<ControlsProps, ControlsSta
 	}
 
 	render(): JSX.Element {
-		const inputs = this.renderInputs();
-
 		return <div onKeyDown={this.handleKeyDown}>
-			{inputs}
+			{this.renderInputs()}
 			<Button label="Render" onClick={this.props.renderToCanvas} />
 		</div>;
 	}

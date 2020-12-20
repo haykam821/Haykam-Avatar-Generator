@@ -18,6 +18,11 @@ export default class OptionRow<T> extends React.Component<OptionRowProps<T>, Opt
 		this.props.update(this.props.option.key, event.target.value || this.props.option.defaultValue);
 	}
 
+	getDefaultValue() : string | number {
+		if (String(this.props.option.value) === String(this.props.option.defaultValue)) return null;
+		return this.props.option.value as unknown as string | number;
+	}
+
 	getType(): string {
 		const type = this.props.option.type || typeof this.props.option.value;
 		return type === "color" ? "string" : type;
@@ -35,6 +40,7 @@ export default class OptionRow<T> extends React.Component<OptionRowProps<T>, Opt
 			key={this.props.option.key}
 			onChange={this.onChange}
 			placeholder={this.props.option.placeholder}
+			defaultValue={this.getDefaultValue()}
 			style={this.getStyle()}
 			type={this.getType()}
 		/>;

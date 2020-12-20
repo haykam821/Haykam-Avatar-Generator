@@ -1,15 +1,12 @@
-import React, { ChangeEventHandler } from "react";
-
 import Paragraph from "./paragraph";
+import RawInput from "./raw-input";
+import React from "react";
 import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	className?: string;
 	description: string;
-	id: string;
-	onChange: ChangeEventHandler<HTMLInputElement>;
-	style?: Record<string, unknown>;
 }
 interface InputState {}
 
@@ -26,28 +23,11 @@ class InputUnstyled extends React.Component<InputProps, InputState> {
 			<label htmlFor={this.props.id}>
 				{this.props.description && <Paragraph text={this.props.description} />}
 			</label>
-			<input {...this.props} />
+			<RawInput id={this.props.id} onChange={this.props.onChange} style={this.props.style} type={this.props.type} placeholder={this.props.placeholder} />
 		</div>;
 	}
 }
 export default styled(InputUnstyled)`
 	padding: 8px;
 	padding-top: 0;
-
-	& > input {
-		background-color: ${props => props.theme.inputBackground};
-		color: ${props => props.theme.inputText};
-
-		border: none;
-		border-radius: 8px;
-		display: block;
-		font-family: 'Ubuntu';
-		font-size: 1.1em;
-		padding: 8px;
-		width: 100%;
-
-		&::placeholder {
-			color: ${props => props.theme.inputPlaceholderText};
-		}
-	}
 `;
