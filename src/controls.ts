@@ -1,4 +1,25 @@
-module.exports = [{
+export interface Options extends Record<string, unknown> {
+	bgColor: string;
+	borderColor: string;
+	cornerRadius: number;
+	lineCount: number;
+	lineWidth: number;
+	lineColor: string;
+	squareColor: string;
+	pentagonColor: string;
+	triangleColor: string;
+}
+
+export interface Control {
+	default?: unknown;
+	description: string;
+	key: string;
+	placeholder?: string;
+	props?: Record<string, unknown>;
+	type: string;
+}
+
+const controls: Control[] = [{
 	default: "#cdcdcd",
 	description: "The color of the background.",
 	key: "bgColor",
@@ -44,3 +65,4 @@ module.exports = [{
 	key: "triangleColor",
 	type: "color",
 }];
+export default controls;

@@ -1,14 +1,20 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve } = require("path");
 
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ManifestPlugin = require("webpack-pwa-manifest");
 
 module.exports = {
-	entry: "./src/index.jsx",
+	entry: "./src/index.tsx",
 	mode: process.env.WEBPACK_MODE || "production",
 	module: {
 		rules: [{
-			test: /\.jsx$/,
-			use: "jsx-loader",
+			include: resolve(__dirname, "./src"),
+			loader: "ts-loader",
+			options: {
+				transpileOnly: true,
+			},
+			test: /\.tsx?$/,
 		}],
 	},
 	output: {
@@ -16,6 +22,7 @@ module.exports = {
 		path: resolve(__dirname, "./dist"),
 	},
 	plugins: [
+		new ForkTsCheckerWebpackPlugin(),
 		new ManifestPlugin({
 			/* eslint-disable camelcase */
 			display: "standalone",
@@ -27,4 +34,11 @@ module.exports = {
 			/* eslint-enable camelcase */
 		}),
 	],
+	resolve: {
+		extensions: [
+			".js",
+			".ts",
+			".tsx",
+		],
+	},
 };

@@ -1,17 +1,15 @@
 const size = 300;
 const scale = 6;
 
-const React = require("react");
-const propTypes = require("prop-types");
+import controls, { Options } from "../controls";
 
-const Card = require("./card.jsx");
-const Controls = require("./controls.jsx");
-
-const styled = require("styled-components").default;
-const chroma = require("chroma-js");
-
-const { editor: editorLog, render: renderLog } = require("../debug.js");
-const controls = require("../controls.js");
+import Card from "./card";
+import Controls from "./controls";
+import React from "react";
+import chroma from "chroma-js";
+import { loggers } from "../debug";
+import propTypes from "prop-types";
+import styled from "styled-components";
 
 /**
  * Draws a polygon.
@@ -22,7 +20,7 @@ const controls = require("../controls.js");
  * @param {number} rotation The offset of the polygon's angle.
  * @param {CanvasRenderingContext2D} ctx The context to render the polygon on.
  */
-function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
+function polygon(radius: number, pointCount: number, xPos: number, yPos: number, rotation: number, ctx: CanvasRenderingContext2D) {
 	// Start path and save
 	ctx.save();
 	ctx.beginPath();
@@ -46,22 +44,19 @@ function polygon(radius, pointCount, xPos, yPos, rotation, ctx) {
 
 /**
  * Darkens a color in Diep.io style for use as a border.
- * @param {string} type The key for the color in the options object.
- * @param {Object} opts The options object to get the color from.
- * @param {number} factor The factor to darken by.
+ * @param type The key for the color in the options object.
+ * @param opts The options object to get the color from.
+ * @param factor The factor to darken by.
  * @returns {string} The color to use.
  */
-function darken(type, opts, factor = 0.75) {
+function darken(type: string, opts: Options, factor = 0.75) {
 	try {
 		if (opts.borderColor) return opts.borderColor;
 
-		const value = opts[type];
+		const value = opts[type] as string | number;
 		if (value === undefined) return "#000000";
 
-		const color = chroma(value);
-		const rgb = chroma(color).rgb();
-
-		return chroma(rgb.map(channel => {
+		return chroma(chroma(value).rgb().map(channel => {
 			return Math.round(channel * factor);
 		})).hex();
 	} catch (error) {
@@ -71,10 +66,10 @@ function darken(type, opts, factor = 0.75) {
 
 /**
  * Clips the corners of the rendering context based on the corner radius.
- * @param {CanvasRenderingContext2D} ctx The context to render the avatar to.
- * @param {Object} opts The options to generate the avatar with.
+ * @param ctx The context to render the avatar to.
+ * @param opts The options to generate the avatar with.
  */
-function clipCorners(ctx, opts = {}) {
+function clipCorners(ctx: CanvasRenderingContext2D, opts: Options) {
 	ctx.moveTo(size / 2, 0);
 
 	ctx.arcTo(size, 0, size, size, Math.min(size / 2, opts.cornerRadius));
@@ -88,11 +83,11 @@ function clipCorners(ctx, opts = {}) {
 
 /**
  * Renders an avatar.
- * @param {CanvasRenderingContext2D} ctx The context to render the avatar to.
- * @param {Object} opts The options to generate the avatar with.
+ * @param ctx The context to render the avatar to.
+ * @param opts The options to generate the avatar with.
  */
-function generate(ctx, opts = {}) {
-	renderLog("rendering avatar to canvas with options: %o", opts);
+function generate(ctx: CanvasRenderingContext2D, opts: Options) {
+	loggers.render("rendering avatar to canvas with options: %o", opts);
 
 	ctx.save();
 	ctx.scale(scale, scale);
@@ -148,15 +143,28 @@ function generate(ctx, opts = {}) {
 	ctx.restore();
 }
 
-class AppUnstyled extends React.Component {
-	constructor(props) {
+interface AppProps {
+	className?: string;
+}
+interface AppState {
+	options: Options;
+}
+
+class AppUnstyled extends React.Component<AppProps, AppState> {
+	public static readonly propTypes = {
+		className: propTypes.string,
+	};
+
+	private readonly canvas: React.RefObject<HTMLCanvasElement>;
+
+	constructor(props: Readonly<AppProps>) {
 		super(props);
 		this.canvas = React.createRef();
 
 		const defaultOptions = Object.fromEntries(controls.map(control => {
 			return [control.key, control.default];
-		}));
-		editorLog("setting default options to %o", defaultOptions);
+		})) as Options;
+		loggers.editor("setting default options to %o", defaultOptions);
 		this.state = {
 			options: defaultOptions,
 		};
@@ -171,12 +179,12 @@ class AppUnstyled extends React.Component {
 		}
 	}
 
-	update(option, value) {
-		editorLog("setting option '%s' to '%s'", option, value);
+	update(key: string, value: unknown) {
+		loggers.editor("setting option '%s' to '%s'", key, value);
 		this.setState({
 			options: {
 				...this.state.options,
-				[option]: value,
+				[key]: value,
 			},
 		}, () => {
 			this.renderToCanvas();
@@ -200,11 +208,7 @@ class AppUnstyled extends React.Component {
 		</div>;
 	}
 }
-AppUnstyled.propTypes = {
-	className: propTypes.string,
-};
-
-const App = styled(AppUnstyled)`
+export default styled(AppUnstyled)`
 	font-family: sans-serif;
 	text-align: center;
 
@@ -220,4 +224,3 @@ const App = styled(AppUnstyled)`
 
 	color: ${props => props.theme.text};
 `;
-module.exports = App;

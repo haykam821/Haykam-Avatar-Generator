@@ -5,10 +5,18 @@
 	"main": "./src/index.jsx",
 	"scripts": {
 		"build": "webpack --config webpack.config.js",
-		"lint": "eslint \"./**/*.js\" \"./**/*.jsx\" --ignore-path .gitignore"
+		"lint": "eslint \"./**/*.js\" \"./**/*.ts\" \"./**/*.tsx\" --ignore-path .gitignore"
 	},
 	"devDependencies": {
-		"babel-eslint": "^10.0.3",
+		"@types/chroma-js": "^2.1.2",
+		"@types/debug": "^4.1.5",
+		"@types/prop-types": "^15.7.3",
+		"@types/react": "^16.14.2",
+		"@types/react-dom": "^16.9.10",
+		"@types/styled-components": "^5.1.7",
+		"@types/webpack-env": "^1.16.0",
+		"@typescript-eslint/eslint-plugin": "^4.4.0",
+		"@typescript-eslint/parser": "^4.4.0",
 		"eslint": "^6.7.2",
 		"eslint-config-haykam": "^1.8.0",
 		"eslint-plugin-extra-rules": "0.0.0-development",
@@ -18,8 +26,10 @@
 		"eslint-plugin-react": "^7.17.0",
 		"eslint-plugin-unicorn": "^10.0.0",
 		"file-loader": "^4.0.0",
+		"fork-ts-checker-webpack-plugin": "^6.0.7",
 		"html-minify-loader": "^1.4.0",
-		"jsx-loader": "^0.13.2",
+		"ts-loader": "^8.0.4",
+		"typescript": "^4.0.3",
 		"webpack": "^4.35.0",
 		"webpack-cli": "^3.3.4"
 	},
@@ -27,24 +37,49 @@
 		"chroma-js": "^2.0.2",
 		"debug": "^4.1.1",
 		"prop-types": "^15.7.2",
-		"react": "^16.7.0",
-		"react-dom": "^16.7.0",
-		"styled-components": "^4.3.2",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"styled-components": "^4.4.1",
 		"webpack-pwa-manifest": "4.0.0"
 	},
 	"eslintConfig": {
 		"extends": [
 			"eslint-config-haykam",
-			"plugin:react/recommended"
+			"plugin:@typescript-eslint/eslint-recommended",
+			"plugin:@typescript-eslint/recommended"
 		],
 		"env": {
 			"browser": true
 		},
-		"parser": "babel-eslint",
-		"settings": {
-			"react": {
-				"version": "detect"
-			}
+		"parser": "@typescript-eslint/parser",
+		"plugins": [
+			"@typescript-eslint"
+		],
+		"rules": {
+			"valid-jsdoc": [
+				"error",
+				{
+					"prefer": {
+						"arg": "param",
+						"argument": "param",
+						"return": "returns"
+					},
+					"preferType": {
+						"object": "Object"
+					},
+					"requireParamDescription": true,
+					"requireParamType": false,
+					"requireReturn": false,
+					"requireReturnDescription": false,
+					"requireReturnType": false
+				}
+			],
+			"semi": "off",
+			"@typescript-eslint/semi": "error",
+			"no-shadow": "off",
+			"@typescript-eslint/no-shadow": "error",
+			"sort-imports": "error",
+			"@typescript-eslint/no-empty-interface": "off"
 		}
 	},
 	"repository": {

@@ -1,7 +1,21 @@
-const { theme: log } = require("./debug.js");
+import { loggers } from "./debug";
 
-const themes = {
-	get custom() {
+export interface Theme {
+	readonly background?: string;
+	readonly buttonBackground?: string;
+	readonly buttonText?: string;
+	readonly canvasBackground?: string;
+	readonly canvasBorder?: string;
+	readonly cardBackground?: string;
+	readonly horizontalRule?: string;
+	readonly inputBackground?: string;
+	readonly inputPlaceholderText?: string;
+	readonly inputText?: string;
+	readonly text?: string;
+}
+
+export const themes: Record<string, Theme> = {
+	get custom(): Theme {
 		try {
 			const customThemeJSON = localStorage.getItem("haykam-avatar-generator:custom-theme");
 			const customParent = localStorage.getItem("haykam-avatar-generator:custom-parent");
@@ -19,7 +33,7 @@ const themes = {
 
 			return {};
 		} catch (error) {
-			log("encountered error when retrieving custom theme:", error);
+			loggers.theme("encountered error when retrieving custom theme:", error);
 			return {};
 		}
 	},
@@ -48,4 +62,3 @@ const themes = {
 		text: "#222",
 	},
 };
-module.exports = themes;

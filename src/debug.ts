@@ -1,7 +1,7 @@
-const debug = require("debug");
+import debug from "debug";
 
 const log = debug("haykam-avatar-generator");
-module.exports = {
+export const loggers = {
 	editor: log.extend("editor"),
 	main: log,
 	render: log.extend("render"),
