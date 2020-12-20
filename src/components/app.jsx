@@ -1,4 +1,5 @@
 const size = 300;
+const scale = 6;
 
 const React = require("react");
 const propTypes = require("prop-types");
@@ -94,6 +95,7 @@ function generate(ctx, opts = {}) {
 	renderLog("rendering avatar to canvas with options: %o", opts);
 
 	ctx.save();
+	ctx.scale(scale, scale);
 
 	ctx.clearRect(0, 0, size, size);
 	clipCorners(ctx, opts);
@@ -189,7 +191,7 @@ class AppUnstyled extends React.Component {
 		return <div className={this.props.className}>
 			<div>
 				<Card header="Preview">
-					<canvas width={size} height={size} ref={this.canvas}></canvas>
+					<canvas width={size * scale} height={size * scale} ref={this.canvas}></canvas>
 				</Card>
 				<Card header="Settings">
 					<Controls update={this.update} renderToCanvas={this.renderToCanvas} controls={controls} />
@@ -213,7 +215,7 @@ const App = styled(AppUnstyled)`
 	canvas {
 		background-color: ${props => props.theme.canvasBackground};
 		border: 1px solid ${props => props.theme.canvasBorder};
-		max-width: 100%;
+		max-width: 300px;
 	}
 
 	color: ${props => props.theme.text};
