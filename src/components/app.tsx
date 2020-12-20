@@ -1,10 +1,9 @@
 const size = 300;
 const scale = 6;
 
-import controls, { Options } from "../controls";
-
 import Card from "./card";
 import Controls from "./controls";
+import OptionManager from "../option/option-manager";
 import React from "react";
 import chroma from "chroma-js";
 import { loggers } from "../debug";
@@ -45,15 +44,16 @@ function polygon(radius: number, pointCount: number, xPos: number, yPos: number,
 /**
  * Darkens a color in Diep.io style for use as a border.
  * @param type The key for the color in the options object.
- * @param opts The options object to get the color from.
+ * @param optionManager The option manager.
  * @param factor The factor to darken by.
  * @returns {string} The color to use.
  */
-function darken(type: string, opts: Options, factor = 0.75) {
-	try {
-		if (opts.borderColor) return opts.borderColor;
+function darken(type: string, optionManager: OptionManager, factor = 0.75): string {
+	const defaultColor = optionManager.getString("borderColor");
+	if (defaultColor) return defaultColor;
 
-		const value = opts[type] as string | number;
+	try {
+		const value = optionManager.get(type) as string | number;
 		if (value === undefined) return "#000000";
 
 		return chroma(chroma(value).rgb().map(channel => {
@@ -67,15 +67,15 @@ function darken(type: string, opts: Options, factor = 0.75) {
 /**
  * Clips the corners of the rendering context based on the corner radius.
  * @param ctx The context to render the avatar to.
- * @param opts The options to generate the avatar with.
+ * @param optionManager The option manager.
  */
-function clipCorners(ctx: CanvasRenderingContext2D, opts: Options) {
+function clipCorners(ctx: CanvasRenderingContext2D, optionManager: OptionManager) {
 	ctx.moveTo(size / 2, 0);
 
-	ctx.arcTo(size, 0, size, size, Math.min(size / 2, opts.cornerRadius));
-	ctx.arcTo(size, size, 0, size, Math.min(size / 2, opts.cornerRadius));
-	ctx.arcTo(0, size, 0, 0, Math.min(size / 2, opts.cornerRadius));
-	ctx.arcTo(0, 0, opts.cornerRadius, 0, Math.min(size / 2, opts.cornerRadius));
+	ctx.arcTo(size, 0, size, size, Math.min(size / 2, optionManager.getNumber("cornerRadius")));
+	ctx.arcTo(size, size, 0, size, Math.min(size / 2, optionManager.getNumber("cornerRadius")));
+	ctx.arcTo(0, size, 0, 0, Math.min(size / 2, optionManager.getNumber("cornerRadius")));
+	ctx.arcTo(0, 0, optionManager.getNumber("cornerRadius"), 0, Math.min(size / 2, optionManager.getNumber("cornerRadius")));
 
 	ctx.lineTo(size / 2, 0);
 	ctx.clip();
@@ -84,32 +84,33 @@ function clipCorners(ctx: CanvasRenderingContext2D, opts: Options) {
 /**
  * Renders an avatar.
  * @param ctx The context to render the avatar to.
- * @param opts The options to generate the avatar with.
+ * @param optionManager The option manager.
  */
-function generate(ctx: CanvasRenderingContext2D, opts: Options) {
-	loggers.render("rendering avatar to canvas with options: %o", opts);
+function generate(ctx: CanvasRenderingContext2D, optionManager: OptionManager) {
+	loggers.render("rendering avatar to canvas with options: %o", optionManager.getAll());
 
 	ctx.save();
 	ctx.scale(scale, scale);
 
 	ctx.clearRect(0, 0, size, size);
-	clipCorners(ctx, opts);
+	clipCorners(ctx, optionManager);
 
 	// Bg
-	ctx.fillStyle = opts.bgColor;
+	ctx.fillStyle = optionManager.getString("bgColor");
 	ctx.fillRect(0, 0, size, size);
 
 	// Lines
-	ctx.strokeStyle = opts.lineColor;
-	ctx.lineWidth = opts.lineWidth;
-	for (let line = 0; line < size; line += (size / opts.lineCount)) {
+	ctx.strokeStyle = optionManager.getString("lineColor");
+	ctx.lineWidth = optionManager.getNumber("lineWidth");
+	const lineSpacing = size / optionManager.getNumber("lineCount");
+	for (let line = 0; line < size; line += lineSpacing) {
 		ctx.beginPath();
 		ctx.moveTo(line, 0);
 		ctx.lineTo(line, size);
 		ctx.closePath();
 		ctx.stroke();
 	}
-	for (let line = 0; line < size; line += (size / opts.lineCount)) {
+	for (let line = 0; line < size; line += lineSpacing) {
 		ctx.beginPath();
 		ctx.moveTo(0, line);
 		ctx.lineTo(size, line);
@@ -121,23 +122,23 @@ function generate(ctx: CanvasRenderingContext2D, opts: Options) {
 	ctx.lineJoin = "round";
 
 	// Green square
-	ctx.fillStyle = opts.squareColor;
+	ctx.fillStyle = optionManager.getString("squareColor");
 	ctx.fillRect(60, 60, size - 120, size - 120);
-	ctx.strokeStyle = darken("squareColor", opts);
+	ctx.strokeStyle = darken("squareColor", optionManager);
 	ctx.strokeRect(60, 60, size - 120, size - 120);
 
 	// Pentagon
-	ctx.fillStyle = opts.pentagonColor;
+	ctx.fillStyle = optionManager.getString("pentagonColor");
 	polygon(70, 5, size / 2, size / 2, -0.32, ctx);
 	ctx.fill();
-	ctx.strokeStyle = darken("pentagonColor", opts);
+	ctx.strokeStyle = darken("pentagonColor", optionManager);
 	ctx.stroke();
 
 	// Pentagon
-	ctx.fillStyle = opts.triangleColor;
+	ctx.fillStyle = optionManager.getString("triangleColor");
 	polygon(35, 3, size / 2, size / 2 + 6, 0.52, ctx);
 	ctx.fill();
-	ctx.strokeStyle = darken("triangleColor", opts);
+	ctx.strokeStyle = darken("triangleColor", optionManager);
 	ctx.stroke();
 
 	ctx.restore();
@@ -146,9 +147,7 @@ function generate(ctx: CanvasRenderingContext2D, opts: Options) {
 interface AppProps {
 	className?: string;
 }
-interface AppState {
-	options: Options;
-}
+interface AppState {}
 
 class AppUnstyled extends React.Component<AppProps, AppState> {
 	public static readonly propTypes = {
@@ -156,18 +155,13 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 	};
 
 	private readonly canvas: React.RefObject<HTMLCanvasElement>;
+	private readonly optionManager: OptionManager = new OptionManager();
 
 	constructor(props: Readonly<AppProps>) {
 		super(props);
 		this.canvas = React.createRef();
 
-		const defaultOptions = Object.fromEntries(controls.map(control => {
-			return [control.key, control.default];
-		})) as Options;
-		loggers.editor("setting default options to %o", defaultOptions);
-		this.state = {
-			options: defaultOptions,
-		};
+		loggers.editor("setting default options to %o", this.optionManager.getAll());
 
 		this.renderToCanvas = this.renderToCanvas.bind(this);
 		this.update = this.update.bind(this);
@@ -175,20 +169,13 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 
 	renderToCanvas() {
 		if (this.canvas) {
-			generate(this.canvas.current.getContext("2d"), this.state.options);
+			generate(this.canvas.current.getContext("2d"), this.optionManager);
 		}
 	}
 
 	update(key: string, value: unknown) {
-		loggers.editor("setting option '%s' to '%s'", key, value);
-		this.setState({
-			options: {
-				...this.state.options,
-				[key]: value,
-			},
-		}, () => {
-			this.renderToCanvas();
-		});
+		this.optionManager.set(key, value);
+		this.renderToCanvas();
 	}
 
 	componentDidMount() {
@@ -202,7 +189,7 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 					<canvas width={size * scale} height={size * scale} ref={this.canvas}></canvas>
 				</Card>
 				<Card header="Settings">
-					<Controls update={this.update} renderToCanvas={this.renderToCanvas} controls={controls} />
+					<Controls update={this.update} renderToCanvas={this.renderToCanvas} optionManager={this.optionManager} />
 				</Card>
 			</div>
 		</div>;
