@@ -1,6 +1,6 @@
 # Haykam Avatar Generator
 
-[![Travis (.com)](https://img.shields.io/travis/com/haykam821/Haykam-Avatar-Generator.svg?style=popout)](https://travis-ci.com/haykam821/Haykam-Avatar-Generator)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/haykam821/Haykam-Avatar-Generator/Build)](https://github.com/haykam821/Haykam-Avatar-Generator/actions/workflows/build.yml)
 
 A generator for haykam-styled avatars.
 
