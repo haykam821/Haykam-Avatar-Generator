@@ -17,14 +17,16 @@
 		"@types/webpack-env": "^1.16.0",
 		"@typescript-eslint/eslint-plugin": "^4.4.0",
 		"@typescript-eslint/parser": "^4.4.0",
-		"eslint": "^6.7.2",
-		"eslint-config-haykam": "^1.8.0",
-		"eslint-plugin-extra-rules": "0.0.0-development",
-		"eslint-plugin-html": "^6.0.0",
-		"eslint-plugin-json": "^1.4.0",
-		"eslint-plugin-markdown": "^1.0.1",
+		"eslint": "^7.32.0",
+		"eslint-config-haykam": "^1.10.0",
+		"eslint-plugin-extra-rules": "^0.0.0-development",
+		"eslint-plugin-html": "^6.1.2",
+		"eslint-plugin-jsdoc": "^32.3.4",
+		"eslint-plugin-json": "^2.1.2",
+		"eslint-plugin-markdown": "^2.2.0",
+		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-react": "^7.17.0",
-		"eslint-plugin-unicorn": "^10.0.0",
+		"eslint-plugin-unicorn": "^28.0.2",
 		"file-loader": "^4.0.0",
 		"fork-ts-checker-webpack-plugin": "^6.0.7",
 		"html-minify-loader": "^1.4.0",
@@ -57,24 +59,7 @@
 			"@typescript-eslint"
 		],
 		"rules": {
-			"valid-jsdoc": [
-				"error",
-				{
-					"prefer": {
-						"arg": "param",
-						"argument": "param",
-						"return": "returns"
-					},
-					"preferType": {
-						"object": "Object"
-					},
-					"requireParamDescription": true,
-					"requireParamType": false,
-					"requireReturn": false,
-					"requireReturnDescription": false,
-					"requireReturnType": false
-				}
-			],
+			"jsdoc/require-param-type": "off",
 			"semi": "off",
 			"@typescript-eslint/semi": "error",
 			"no-shadow": "off",
