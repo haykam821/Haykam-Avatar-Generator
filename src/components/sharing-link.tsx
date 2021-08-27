@@ -1,3 +1,4 @@
+import Button from "./button";
 import OptionManager from "../option/option-manager";
 import Paragraph from "./paragraph";
 import RawInput from "./raw-input";
@@ -23,6 +24,8 @@ class SharingLinkUnstyled extends React.Component<SharingLinkProps, SharingLinkS
 
 		this.updateLink = this.updateLink.bind(this);
 		this.props.optionManager.addEventListener("update", this.updateLink);
+
+		this.attemptShare = this.attemptShare.bind(this);
 	}
 
 	componentWillUnmount() {
@@ -48,14 +51,33 @@ class SharingLinkUnstyled extends React.Component<SharingLinkProps, SharingLinkS
 		});
 	}
 
+	private canShare(): boolean {
+		return typeof navigator.share === "function";
+	}
+
+	private attemptShare(): void {
+		if (this.canShare()) {
+			navigator.share({
+				title: "Avatar",
+				url: this.state.link,
+			});
+		}
+	}
+
 	render(): JSX.Element {
 		return <div className={this.props.className}>
 			<Paragraph text="Copy the following link to share the avatar with others:" />
 			<RawInput readOnly value={this.state.link} />
+			{this.canShare() && <Button label="Share" onClick={this.attemptShare} />}
 		</div>;
 	}
 }
 export default styled(SharingLinkUnstyled)`
 	padding: 8px;
 	padding-top: 0;
+
+	& > ${Button} {
+		margin-left: unset;
+		margin-right: unset;
+	}
 `;
