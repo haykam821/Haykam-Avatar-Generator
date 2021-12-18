@@ -3,6 +3,7 @@ const { resolve } = require("path");
 
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ManifestPlugin = require("webpack-pwa-manifest");
+const { GenerateSW: ServiceWorkerPlugin } = require("workbox-webpack-plugin");
 
 module.exports = {
 	entry: "./src/index.tsx",
@@ -33,6 +34,7 @@ module.exports = {
 			short_name: "Haykam Avatar",
 			/* eslint-enable camelcase */
 		}),
+		new ServiceWorkerPlugin(),
 	],
 	resolve: {
 		extensions: [

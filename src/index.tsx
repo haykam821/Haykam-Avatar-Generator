@@ -8,3 +8,7 @@ import { loggers } from "./debug";
 ReactDOM.render(<ThemedApp />, document.getElementById("app"), () => {
 	loggers.main("mounted application");
 });
+
+if ("serviceWorker" in navigator) {
+	navigator.serviceWorker.register("/service-worker.js");
+}
