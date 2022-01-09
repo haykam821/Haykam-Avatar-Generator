@@ -31,7 +31,7 @@ function polygon(radius: number, pointCount: number, xPos: number, yPos: number,
 
 	ctx.moveTo(radius, 0);
 
-	for (let point = 0; point <= pointCount; point++) {
+	for (let point = 0; point <= pointCount; point += 1) {
 		ctx.rotate(2 * Math.PI / pointCount);
 		ctx.lineTo(radius, 0);
 	}
