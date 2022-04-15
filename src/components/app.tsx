@@ -185,6 +185,7 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 	}
 
 	componentDidMount() {
+		loggers.main("mounted application");
 		this.renderToCanvas();
 	}
 

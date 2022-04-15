@@ -1,11 +1,13 @@
+import React, { ReactNode } from "react";
+
 import Header from "./header";
-import React from "react";
 import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface CardProps {
 	className?: string;
 	header: string;
+	children?: ReactNode;
 }
 interface CardState {}
 
