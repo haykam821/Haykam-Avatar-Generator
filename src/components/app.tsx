@@ -13,12 +13,12 @@ import styled from "styled-components";
 
 /**
  * Draws a polygon.
- * @param {number} radius The radius of the polygon.
- * @param {number} pointCount The number of points on the polygon.
- * @param {number} xPos The X coordinate of the polygon's center.
- * @param {number} yPos The Y coordinate of the polygon's center.
- * @param {number} rotation The offset of the polygon's angle.
- * @param {CanvasRenderingContext2D} ctx The context to render the polygon on.
+ * @param radius The radius of the polygon.
+ * @param pointCount The number of points on the polygon.
+ * @param xPos The X coordinate of the polygon's center.
+ * @param yPos The Y coordinate of the polygon's center.
+ * @param rotation The offset of the polygon's angle.
+ * @param ctx The context to render the polygon on.
  */
 function polygon(radius: number, pointCount: number, xPos: number, yPos: number, rotation: number, ctx: CanvasRenderingContext2D) {
 	// Start path and save
@@ -47,7 +47,7 @@ function polygon(radius: number, pointCount: number, xPos: number, yPos: number,
  * @param type The key for the color in the options object.
  * @param optionManager The option manager.
  * @param factor The factor to darken by.
- * @returns {string} The color to use.
+ * @returns The color to use.
  */
 function darken(type: string, optionManager: OptionManager, factor = 0.75): string {
 	const defaultColor = optionManager.getString("borderColor");
@@ -57,9 +57,13 @@ function darken(type: string, optionManager: OptionManager, factor = 0.75): stri
 		const value = optionManager.get(type) as string | number;
 		if (value === undefined) return "#000000";
 
-		return chroma(chroma(value).rgb().map(channel => {
-			return Math.round(channel * factor);
-		})).hex();
+		const roundedRgb = chroma(value)
+			.rgb()
+			.map(channel => {
+				return Math.round(channel * factor);
+			});
+
+		return chroma(roundedRgb).hex();
 	} catch (error) {
 		return "#ffffff";
 	}
