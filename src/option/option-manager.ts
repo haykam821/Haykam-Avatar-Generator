@@ -1,4 +1,4 @@
-import { EventTarget } from "event-target-shim";
+import { Event, EventTarget } from "event-target-shim";
 import Option from "./option";
 import { loggers } from "../debug";
 

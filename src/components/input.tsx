@@ -1,7 +1,6 @@
 import Paragraph from "./paragraph";
 import RawInput from "./raw-input";
 import React from "react";
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
@@ -11,13 +10,6 @@ interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<H
 interface InputState {}
 
 class InputUnstyled extends React.Component<InputProps, InputState> {
-	public static readonly propTypes = {
-		className: propTypes.string,
-		description: propTypes.string,
-		id: propTypes.string,
-		style: propTypes.object,
-	};
-
 	render(): JSX.Element {
 		return <div className={this.props.className}>
 			<label htmlFor={this.props.id}>

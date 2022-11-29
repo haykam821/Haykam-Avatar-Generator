@@ -2,7 +2,6 @@ import Button from "./button";
 import OptionManager from "../option/option-manager";
 import OptionRow from "./option-row";
 import React from "react";
-import propTypes from "prop-types";
 
 interface ControlsProps {
 	className?: string;
@@ -13,11 +12,6 @@ interface ControlsProps {
 interface ControlsState {}
 
 export default class Controls extends React.Component<ControlsProps, ControlsState> {
-	public static readonly propTypes = {
-		renderToCanvas: propTypes.func,
-		update: propTypes.func,
-	};
-
 	constructor(props: Readonly<ControlsProps>) {
 		super(props);
 		this.handleKeyDown = this.handleKeyDown.bind(this);

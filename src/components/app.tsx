@@ -8,7 +8,6 @@ import React from "react";
 import SharingLink from "./sharing-link";
 import chroma from "chroma-js";
 import { loggers } from "../debug";
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 /**
@@ -155,10 +154,6 @@ interface AppProps {
 interface AppState {}
 
 class AppUnstyled extends React.Component<AppProps, AppState> {
-	public static readonly propTypes = {
-		className: propTypes.string,
-	};
-
 	private readonly canvas: React.RefObject<HTMLCanvasElement>;
 	private readonly optionManager: OptionManager = new OptionManager();
 
@@ -166,8 +161,10 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 		super(props);
 		this.canvas = React.createRef();
 
-		this.optionManager.restoreFromParams(new URLSearchParams(location.search));
-		loggers.editor("setting default options to %o", this.optionManager.getAll());
+		if (typeof location !== "undefined") {
+			this.optionManager.restoreFromParams(new URLSearchParams(location.search));
+			loggers.editor("setting default options to %o", this.optionManager.getAll());
+		}
 
 		this.renderToCanvas = this.renderToCanvas.bind(this);
 		this.update = this.update.bind(this);
@@ -199,7 +196,7 @@ class AppUnstyled extends React.Component<AppProps, AppState> {
 					<Controls update={this.update} renderToCanvas={this.renderToCanvas} optionManager={this.optionManager} />
 				</Card>
 				<Card header="Sharing">
-					<SharingLink location={window.location} optionManager={this.optionManager} />
+					<SharingLink location={typeof location === "undefined" ? null : location} optionManager={this.optionManager} />
 				</Card>
 			</div>
 		</div>;
@@ -214,10 +211,19 @@ export default styled(AppUnstyled)`
 	}
 
 	canvas {
-		background-color: ${props => props.theme.canvasBackground};
-		border: 1px solid ${props => props.theme.canvasBorder};
+		background-color: black;
+		border: 1px solid gray;
 		max-width: 300px;
 	}
 
-	color: ${props => props.theme.text};
+	color: #222;
+
+	@media (prefers-color-scheme: dark) {
+		canvas {
+			background-color: white;
+			border-color: black;
+		}
+
+		color: white;
+	}
 `;

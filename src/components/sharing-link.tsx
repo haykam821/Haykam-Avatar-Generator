@@ -43,6 +43,10 @@ class SharingLinkUnstyled extends React.Component<SharingLinkProps, SharingLinkS
 	}
 
 	private getLink(filter: OptionFilter): string {
+		if (this.props.location === null) {
+			return "";
+		}
+
 		const url = new URL(this.props.location.href);
 
 		const options = Object.entries(this.props.optionManager.getAll());
@@ -71,7 +75,7 @@ class SharingLinkUnstyled extends React.Component<SharingLinkProps, SharingLinkS
 	}
 
 	private canShare(): boolean {
-		return typeof navigator.share === "function";
+		return typeof navigator === "object" && typeof navigator.share === "function";
 	}
 
 	private attemptShare(): void {

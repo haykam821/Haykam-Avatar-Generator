@@ -1,6 +1,4 @@
 import React from "react";
-import { Theme } from "../themes";
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface HRProps {
@@ -9,16 +7,12 @@ interface HRProps {
 interface HRState {}
 
 class HRUnstyled extends React.Component<HRProps, HRState> {
-	public static readonly propTypes = {
-		className: propTypes.string,
-	};
-
 	render(): JSX.Element {
 		return <div className={this.props.className} />;
 	}
 }
 export default styled(HRUnstyled)`
-	border-color: ${props => (props.theme as Theme).horizontalRule};
+	border-color: #333;
 	border-top: 0.5px solid;
 	border-bottom: 0.5px solid;
 

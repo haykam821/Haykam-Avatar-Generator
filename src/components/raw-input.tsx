@@ -10,8 +10,8 @@ class RawInputUnstyled extends React.Component<RawInputProps, RawInputState> {
 	}
 }
 export default styled(RawInputUnstyled)`
-	background-color: ${props => props.theme.inputBackground};
-	color: ${props => props.theme.inputText};
+	background-color: white;
+	color: #555;
 
 	border: none;
 	border-radius: 8px;
@@ -22,6 +22,11 @@ export default styled(RawInputUnstyled)`
 	width: 100%;
 
 	&::placeholder {
-		color: ${props => props.theme.inputPlaceholderText};
+		color: #aaa;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: #1b1b1b;
+		color: white;
 	}
 `;

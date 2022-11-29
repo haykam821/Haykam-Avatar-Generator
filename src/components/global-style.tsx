@@ -1,10 +1,9 @@
-import { Theme } from "../themes";
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 	body, html {
 		margin: 0;
-		background-color: ${props => (props.theme as Theme).background};
+		background-color: #fafafa;
 	}
 
 	body, html, #app {
@@ -14,5 +13,11 @@ export default createGlobalStyle`
 
 	* {
 		box-sizing: border-box;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		body, html {
+			background-color: #1b1b1b;
+		}
 	}
 `;

@@ -1,5 +1,4 @@
 import React from "react";
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface ParagraphProps {
@@ -10,12 +9,6 @@ interface ParagraphProps {
 interface ParagraphState {}
 
 class ParagraphUnstyled extends React.Component<ParagraphProps, ParagraphState> {
-	public static readonly propTypes = {
-		className: propTypes.string,
-		style: propTypes.object,
-		text: propTypes.string,
-	};
-
 	render() {
 		return <p className={this.props.className} style={this.props.style}>
 			{this.props.text}

@@ -5,5 +5,4 @@ export const loggers = {
 	editor: log.extend("editor"),
 	main: log,
 	render: log.extend("render"),
-	theme: log.extend("theme"),
 };

@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.5.0
+      - name: Configure Pages
+        uses: actions/configure-pages@v2.1.3
+        with:
+          static_site_generator: next
       - name: Install
         run: npm install
       - name: Build
@@ -16,7 +20,7 @@ jobs:
       - name: Upload
         uses: actions/upload-pages-artifact@v1.0.5
         with:
-          path: dist
+          path: out
   deploy:
     needs: build
     permissions:

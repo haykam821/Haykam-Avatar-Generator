@@ -1,0 +1,8 @@
+{
+	"display": "standalone",
+	"fingerprints": false,
+	"inject": false,
+	"lang": "en",
+	"name": "Haykam Avatar Generator",
+	"short_name": "Haykam Avatar"
+}

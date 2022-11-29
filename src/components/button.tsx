@@ -1,6 +1,5 @@
 import React, { MouseEventHandler } from "react";
 
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface ButtonProps {
@@ -12,12 +11,6 @@ interface ButtonProps {
 interface ButtonState {}
 
 class ButtonUnstyled extends React.Component<ButtonProps, ButtonState> {
-	public static readonly propTypes = {
-		className: propTypes.string,
-		label: propTypes.string,
-		style: propTypes.object,
-	};
-
 	render() {
 		return <button onClick={this.props.onClick} className={this.props.className} style={this.props.style}>
 			{this.props.label}
@@ -25,8 +18,8 @@ class ButtonUnstyled extends React.Component<ButtonProps, ButtonState> {
 	}
 }
 export default styled(ButtonUnstyled)`
-	background-color: ${props => props.theme.buttonBackground};
-	color: ${props => props.theme.buttonText};
+	background-color: #1976d2;
+	color: white;
 	font-weight: 500;
 
 	border: none;

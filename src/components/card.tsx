@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 
 import Header from "./header";
-import propTypes from "prop-types";
 import styled from "styled-components";
 
 interface CardProps {
@@ -12,12 +11,6 @@ interface CardProps {
 interface CardState {}
 
 class CardUnstyled extends React.Component<CardProps, CardState> {
-	public static readonly propTypes = {
-		children: propTypes.node,
-		className: propTypes.string,
-		header: propTypes.string,
-	};
-
 	render() {
 		return <div className={this.props.className}>
 			{this.props.header && <Header text={this.props.header} />}
@@ -33,5 +26,9 @@ export default styled(CardUnstyled)`
 		margin-bottom: 24px;
 	}
 
-	background-color: ${props => props.theme.cardBackground};
+	background-color: #c7c7c7;
+
+	@media (prefers-color-scheme: dark) {
+		background-color: #424242;
+	}
 `;
