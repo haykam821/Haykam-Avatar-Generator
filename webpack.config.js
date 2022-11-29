@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve } = require("path");
+const { resolve } = require("node:path");
 
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const ManifestPlugin = require("webpack-pwa-manifest");
