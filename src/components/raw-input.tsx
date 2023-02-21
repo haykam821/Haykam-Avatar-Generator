@@ -1,3 +1,4 @@
+import { FONT } from "../font";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,7 +17,7 @@ export default styled(RawInputUnstyled)`
 	border: none;
 	border-radius: 8px;
 	display: block;
-	font-family: 'Ubuntu';
+	${FONT.style}
 	font-size: 1.1em;
 	padding: 8px;
 	width: 100%;

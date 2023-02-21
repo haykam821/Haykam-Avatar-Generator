@@ -1,3 +1,4 @@
+import { FONT } from "../font";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,7 +17,7 @@ class HeaderUnstyled extends React.Component<HeaderProps, HeaderState> {
 }
 export default styled(HeaderUnstyled)`
 	text-align: left;
-	font-family: "Ubuntu", sans-serif;
+	${FONT.style}
 	font-size: 1.8em;
 	text-transform: capitalize;
 	margin: 0;

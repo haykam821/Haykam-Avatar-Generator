@@ -1,5 +1,6 @@
 import React, { MouseEventHandler } from "react";
 
+import { FONT } from "../font";
 import styled from "styled-components";
 
 interface ButtonProps {
@@ -26,7 +27,7 @@ export default styled(ButtonUnstyled)`
 	border-radius: 8px;
 	display: block;
 
-	font-family: 'Ubuntu';
+	${FONT.style}
 	font-size: 1.2em;
 
 	margin: 0 8px;
